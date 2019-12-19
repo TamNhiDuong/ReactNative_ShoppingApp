@@ -5,12 +5,14 @@ import Authentication from './Authentication/Authentication'
 import ChangeInfor from './ChangeInfor/ChangeInfor';
 import Main from './Main/Main';
 import OrderHistory from './OrderHistory/OrderHistory'; 
+import Menu from '../components/Main/Menu'; 
 
 const AppNavigator = createStackNavigator({
     AUTHENTICATION: {screen: Authentication},
     CHANGEINFOR: {screen: ChangeInfor},   
     MAIN: {screen: Main},
     ORDERHISTORY: {screen: OrderHistory}, 
+    MENU: {screen: Menu},
 },
 {
     initialRouteName: 'MAIN'
