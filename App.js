@@ -8,8 +8,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: 'gray'}}>
-        <Text>React Shop App</Text>
-        <AppContainer/>
+        <AppContainer />
       </View>
     );
   }
