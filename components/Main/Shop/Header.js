@@ -28,7 +28,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: height / 6,
+    height: height / 5,
     backgroundColor: '#437777',
     padding: 10,
     justifyContent: 'space-around',

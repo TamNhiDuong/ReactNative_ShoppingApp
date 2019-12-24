@@ -1,12 +1,18 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, ScrollView} from 'react-native';
+
+import Collection from './Collection';
+import Category from './Category';
+import TopProduct from './TopProduct';
 
 export default class Home extends React.Component {
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#5f89b3'}}>
-        <Text>Home component</Text>
-      </View>
+      <ScrollView style={{flex: 1, backgroundColor: '#DBDBD8'}}>
+        <Category />
+        <Collection />
+        <TopProduct />
+      </ScrollView>
     );
   }
 }
