@@ -6,7 +6,7 @@ import profileIcon from '../../images/temp/profile.png';
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLogIn: true};
+    this.state = {isLogIn: false};
   }
   render() {
     const {
@@ -19,7 +19,9 @@ export default class Menu extends React.Component {
     } = styles;
     const notSignInJSX = (
       <View>
-        <TouchableOpacity style={btnStyle}>
+        <TouchableOpacity
+          style={btnStyle}
+          onPress={() => this.props.navigation.navigate('AUTHENTICATION')}>
           <Text style={btnText}>Sign In</Text>
         </TouchableOpacity>
       </View>
@@ -28,13 +30,19 @@ export default class Menu extends React.Component {
       <View style={smallContainer}>
         <Text style={nameText}>Tanja D</Text>
         <View>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity
+            style={btnStyle}
+            onPress={() => this.props.navigation.navigate('ORDERHISTORY')}>
             <Text style={btnText}>Order History</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity
+            style={btnStyle}
+            onPress={() => this.props.navigation.navigate('CHANGEINFOR')}>
             <Text style={btnText}>Change Infor</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity
+            style={btnStyle}
+            onPress={() => this.props.navigation.navigate('AUTHENTICATION')}>
             <Text style={btnText}>Sign Out</Text>
           </TouchableOpacity>
         </View>
