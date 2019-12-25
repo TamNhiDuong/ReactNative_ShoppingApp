@@ -79,10 +79,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    paddingBottom: 10,
   },
   productContainer: {
     width: productWidth,
     paddingBottom: 20,
+    shadowColor: '#2E272B',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.2,
   },
   product: {
     width: productWidth,
@@ -96,5 +100,6 @@ const styles = StyleSheet.create({
   productName: {
     color: '#D3D3CF',
     paddingLeft: 20,
+    marginVertical: 5,
   },
 });
