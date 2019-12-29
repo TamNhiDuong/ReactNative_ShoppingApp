@@ -1,40 +1,20 @@
 import React from 'react';
-import {Text, View, ImageBackground, StyleSheet, Dimensions} from 'react-native';
-import Swiper from 'react-native-swiper'
+import {Text, View, Image, StyleSheet, Dimensions} from 'react-native';
 
-import littleDress from '../../../../images/temp/little.jpg';
-import maxiDress from '../../../../images/temp/maxi.jpg';
-import partyDress from '../../../../images/temp/party.jpg';
+import banner from '../../../../images/temp/banner.jpg'; 
 
+const {width, height} = Dimensions.get('window');
 
-const {height, width} = Dimensions.get('window');
-
-export default class Collection extends React.Component {
+export default class Category extends React.Component {
   render() {
-    const {wrapper, image, text, cateTitle, cateWrap} = styles;
+    const {wrapper, image, text} = styles;
     return (
       <View style={wrapper}>
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={text}>LIST OF CATEGORY</Text>
+          <Text style={text}>SPRING COLLECTION</Text>
         </View>
         <View style={{flex: 4}}>
-          <Swiper>
-            <ImageBackground style={image} source={littleDress}>
-              <View style={cateWrap}>
-                <Text style={cateTitle}>Little Dress</Text>
-              </View>
-            </ImageBackground>
-            <ImageBackground style={image} source={maxiDress}>
-              <View style={cateWrap}>
-                <Text style={cateTitle}>Maxi Dress</Text>
-              </View>
-            </ImageBackground>
-            <ImageBackground style={image} source={partyDress}>
-              <View style={cateWrap}>
-                <Text style={cateTitle}>Party Dress</Text>
-              </View>
-            </ImageBackground>
-          </Swiper>
+          <Image source={banner} style={image} />
         </View>
       </View>
     );
@@ -44,13 +24,13 @@ const imageWidth = width - 40;
 const imageHeight = (imageWidth / 933) * 465;
 const styles = StyleSheet.create({
   wrapper: {
-    height: height * 0.31,
+    height: height * 0.3,
     backgroundColor: '#FFF',
     margin: 10,
     shadowColor: '#2E272B',
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.2,
-    padding: 10,
+    padding: 10
   },
   image: {
     height: imageHeight,
@@ -60,18 +40,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#AFAEAF',
     justifyContent: 'space-around',
-  },
-  cateTitle: {
-    fontSize: 22,
-    color: '#9A9A9A',
-  },
-  cateWrap: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
   },
 });

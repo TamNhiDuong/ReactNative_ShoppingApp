@@ -4,7 +4,8 @@ import Drawer from 'react-native-drawer';
 
 import Shop from './Shop/Shop';
 import Menu from './Menu';
-import AppContainer from '../AppNavigator';
+import ProductList from './Shop/ProductList/ProductList';
+import Header from './Shop/Header'; 
 
 export default class Main extends React.Component {
   closeControlPanel = () => {
@@ -14,18 +15,17 @@ export default class Main extends React.Component {
     this.drawer.open();
   };
   render() {
-    const {navigation} = this.props; 
+    const {navigation} = this.props;
     return (
       <Drawer
         ref={
-          (ref) => { this.drawer = ref; }
-        }
-        content={<Menu navigation={navigation}/>}
+         (ref) => { this.drawer = ref; }
+      }
+        content={<Menu navigation={navigation} />}
         openDrawerOffset={0.4}
         tapToClose={true}>
-        <Shop open={this.openControlPanel.bind(this)} />
+        <Shop open={this.openControlPanel.bind(this)} navigation={navigation} />
       </Drawer>
-
     );
   }
 }

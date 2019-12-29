@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import {Text, View, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 
 import product1 from '../../../../images/temp/product1.jpeg';
 import product2 from '../../../../images/temp/product2.jpeg';
@@ -8,6 +8,10 @@ import product4 from '../../../../images/temp/product4.jpeg';
 import product5 from '../../../../images/temp/product5.jpeg';
 
 export default class TopProduct extends React.Component {
+  gotoProductDetails() {
+    const {navigator} = this.props;
+    navigator.push({name: 'PRODUCTDETAILS'});
+  }
   render() {
     const {
       container,
@@ -26,29 +30,29 @@ export default class TopProduct extends React.Component {
         </View>
 
         <View style={body}>
-          <View style={productContainer}>
+          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
             <Image source={product1} style={product} />
             <Text style={productName}>PRODUCT NAME</Text>
             <Text style={price}>99‎€</Text>
-          </View>
-          <View style={productContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
             <Image source={product2} style={product} />
             <Text style={productName}>PRODUCT NAME</Text>
             <Text style={price}>99‎€</Text>
-          </View>
+          </TouchableOpacity>
 
           <View style={{height: 10, width}} />
   
-          <View style={productContainer}>
+          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
             <Image source={product3} style={product} />
             <Text style={productName}>PRODUCT NAME</Text>
             <Text style={price}>99‎€</Text>
-          </View>
-          <View style={productContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
             <Image source={product4} style={product} />
             <Text style={productName}>PRODUCT NAME</Text>
             <Text style={price}>99‎€</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     );

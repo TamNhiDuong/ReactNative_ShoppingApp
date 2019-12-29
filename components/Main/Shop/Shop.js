@@ -7,6 +7,7 @@ import Contact from './Contact/Contact';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Header from './Header';
+import ProductList from './ProductList/ProductList';
 
 import homeIconS from '../../../images/appIcon/home.png';
 import homeIcon0 from '../../../images/appIcon/home0.png';
@@ -26,8 +27,10 @@ export default class Shop extends React.Component {
     const {open} = this.props;
     open();
   }
+
   render() {
     const {icons, title} = styles;
+    const {navigation} = this.props;
     return (
       <View style={{flex: 1}}>
         <Header onOpen={this.openMenu.bind(this)} />
@@ -39,7 +42,7 @@ export default class Shop extends React.Component {
             renderIcon={() => <Image source={homeIcon0} style={icons} />}
             renderSelectedIcon={() => <Image source={homeIconS} style={icons}/>}
             selectedTitleStyle={title}>
-            <Home />
+            <Home navigation={navigation} />
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'cart'}

@@ -6,7 +6,7 @@ import profileIcon from '../../images/temp/profile.png';
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLogIn: false};
+    this.state = {isLogIn: true};
   }
   render() {
     const {
@@ -39,6 +39,11 @@ export default class Menu extends React.Component {
             style={btnStyle}
             onPress={() => this.props.navigation.navigate('CHANGEINFOR')}>
             <Text style={btnText}>Change Infor</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={btnStyle}
+            onPress={() => this.props.navigation.navigate('CONTACT')}>
+            <Text style={btnText}>Contact</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={btnStyle}
