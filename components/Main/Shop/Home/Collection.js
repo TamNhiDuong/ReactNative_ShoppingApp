@@ -17,7 +17,7 @@ export default class Category extends React.Component {
           <Image source={banner} style={image} />
         </View>
       </View>
-    );
+    ); 
   }
 }
 const imageWidth = width - 40;

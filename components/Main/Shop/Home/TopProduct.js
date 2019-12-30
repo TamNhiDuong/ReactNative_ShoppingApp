@@ -5,7 +5,9 @@ import product1 from '../../../../images/temp/product1.jpeg';
 import product2 from '../../../../images/temp/product2.jpeg';
 import product3 from '../../../../images/temp/product3.jpeg';
 import product4 from '../../../../images/temp/product4.jpeg';
-import product5 from '../../../../images/temp/product5.jpeg';
+
+import color from '../../../GlobalStyles/color';
+
 
 export default class TopProduct extends React.Component {
   gotoProductDetails() {
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   title: {
-    color: '#D3D3CF',
+    color: '#AFAEAF',
     fontSize: 20,
   },
   body: {
@@ -88,21 +90,18 @@ const styles = StyleSheet.create({
   productContainer: {
     width: productWidth,
     paddingBottom: 20,
-    shadowColor: '#2E272B',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.2,
   },
   product: {
     width: productWidth,
     height: productHeight,
   },
   price: {
-    color: '#a195d5',
+    color: '#B10D65',
     fontWeight: '600',
     paddingLeft: 20,
   },
   productName: {
-    color: '#D3D3CF',
+    color: '#9A9A9A',
     paddingLeft: 20,
     marginVertical: 5,
   },

@@ -1,12 +1,24 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, ScrollView} from 'react-native';
+import CustomComponents from 'react-native-deprecated-custom-components';
 
-export default class Cart extends React.Component {
+import SearchView from './SearchView';
+import ProductDetails from '../ProductDetails/ProductDetails';
+
+export default class Search extends React.Component {
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#b35fa9'}}>
-        <Text>Search component</Text>
-      </View>
+      <CustomComponents.Navigator
+        initialRoute={{name: 'SEARCHVIEW'}}
+        renderScene={(route, navigator) => {
+        switch(route.name) {
+            case 'SEARCHVIEW':
+              return <SearchView navigator={navigator} />;
+            default:
+              return <ProductDetails navigator={navigator} />;
+        }
+      }}
+      />
     );
   }
 }

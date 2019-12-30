@@ -33,16 +33,16 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: height / 5,
+    height: height / 6,
     backgroundColor: '#437777',
     padding: 10,
     justifyContent: 'space-around',
   },
   row1: {flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20},
-  input: {height: height / 25, backgroundColor: '#FFF', paddingLeft: 15},
+  input: {height: height / 27, backgroundColor: '#FFF', paddingLeft: 20},
   icons: {height: 25, width: 25},
   logo: {height: 85, width: 45},
-  title: {
+  title: { 
     color: '#FFF',
     fontSize: 22,
     paddingTop: 15,
