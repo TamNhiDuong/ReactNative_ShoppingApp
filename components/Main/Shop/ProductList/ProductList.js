@@ -41,7 +41,7 @@ export default class ProductList extends Component {
             <View style={{ width: 30 }} />
           </View>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
             <View style={productContainer}>
               <Image style={productImage} source={product1} />
               <View style={productInfor}>
@@ -56,7 +56,7 @@ export default class ProductList extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
             <View style={productContainer}>
               <Image style={productImage} source={product1} />
               <View style={productInfor}>
@@ -71,7 +71,7 @@ export default class ProductList extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
             <View style={productContainer}>
               <Image style={productImage} source={product1} />
               <View style={productInfor}>
@@ -86,7 +86,7 @@ export default class ProductList extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
             <View style={productContainer}>
               <Image style={productImage} source={product1} />
               <View style={productInfor}>
