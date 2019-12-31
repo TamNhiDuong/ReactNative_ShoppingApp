@@ -2,11 +2,6 @@ import React from 'react';
 import {Text, View, ImageBackground, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 import Swiper from 'react-native-swiper'
 
-import littleDress from '../../../../images/temp/little.jpg';
-import maxiDress from '../../../../images/temp/maxi.jpg';
-import partyDress from '../../../../images/temp/party.jpg';
-
-
 const {height, width} = Dimensions.get('window');
 const url = 'http://localhost:8080/api/images/type/';
 

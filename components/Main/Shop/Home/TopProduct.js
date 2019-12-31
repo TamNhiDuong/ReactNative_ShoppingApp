@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity, ListView } from 'react-native';
 
 import product1 from '../../../../images/temp/product1.jpeg';
 import product2 from '../../../../images/temp/product2.jpeg';
@@ -8,11 +8,11 @@ import product4 from '../../../../images/temp/product4.jpeg';
 
 import color from '../../../GlobalStyles/color';
 
-
+const url = 'http://localhost:8080/api/images/product/';
 export default class TopProduct extends React.Component {
   gotoProductDetails() {
-    const {navigator} = this.props;
-    navigator.push({name: 'PRODUCTDETAILS'});
+    const { navigator } = this.props;
+    navigator.push({ name: 'PRODUCTDETAILS' });
   }
   render() {
     const {
@@ -25,6 +25,9 @@ export default class TopProduct extends React.Component {
       price,
       productName,
     } = styles;
+    const { topProducts } = this.props;
+    console.log(topProducts);
+
     return (
       <View style={container}>
         <View style={titleContainer}>
@@ -32,36 +35,23 @@ export default class TopProduct extends React.Component {
         </View>
 
         <View style={body}>
-          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
-            <Image source={product1} style={product} />
-            <Text style={productName}>PRODUCT NAME</Text>
-            <Text style={price}>99‎€</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
-            <Image source={product2} style={product} />
-            <Text style={productName}>PRODUCT NAME</Text>
-            <Text style={price}>99‎€</Text>
-          </TouchableOpacity>
-
-          <View style={{height: 10, width}} />
-  
-          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
-            <Image source={product3} style={product} />
-            <Text style={productName}>PRODUCT NAME</Text>
-            <Text style={price}>99‎€</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
-            <Image source={product4} style={product} />
-            <Text style={productName}>PRODUCT NAME</Text>
-            <Text style={price}>99‎€</Text>
-          </TouchableOpacity>
+          {topProducts.map(e => (
+            <TouchableOpacity key={e.id} style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
+              <Image 
+                source={{ url: 'http://localhost:8080/api/images/product/' + e.images[0]}}
+                style={product}
+              />
+              <Text style={productName}>{e.name}</Text>
+              <Text style={price}>{e.price}€</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
     );
   }
 }
 //361/452
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const productWidth = (width - 50) / 2;
 const productHeight = (productWidth * 452) / 361;
 const styles = StyleSheet.create({
@@ -69,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     margin: 10,
     shadowColor: '#2E272B',
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
   },
   titleContainer: {

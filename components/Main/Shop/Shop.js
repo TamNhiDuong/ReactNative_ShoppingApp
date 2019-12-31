@@ -24,14 +24,15 @@ export default class Shop extends React.Component {
     this.state = {
       selectedTab: 'home',
       types: [],
+      topProducts: [],
     };
   }
   componentDidMount() {
     fetch('http://localhost:8080/api/')
       .then(res => res.json())
       .then(resJSON => {
-        const {type} = resJSON;
-        this.setState({types: type});
+        const {type, product} = resJSON;
+        this.setState({types: type, topProducts: product});
       });
   }
   openMenu() {
@@ -42,7 +43,7 @@ export default class Shop extends React.Component {
   render() {
     const {icons, title} = styles;
     const {navigation} = this.props;
-    const {selectedTab, types} = this.state;
+    const {selectedTab, types, topProducts} = this.state;
     return (
       <View style={{flex: 1}}>
         <Header onOpen={this.openMenu.bind(this)} />
@@ -54,7 +55,11 @@ export default class Shop extends React.Component {
             renderIcon={() => <Image source={homeIcon0} style={icons} />}
             renderSelectedIcon={() => <Image source={homeIconS} style={icons}/>}
             selectedTitleStyle={title}>
-            <Home navigation={navigation} types={types} />
+            <Home 
+              navigation={navigation}
+              types={types}
+              topProducts={topProducts}
+            />
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={selectedTab === 'cart'}
