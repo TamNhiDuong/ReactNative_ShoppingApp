@@ -8,6 +8,7 @@ import partyDress from '../../../../images/temp/party.jpg';
 
 
 const {height, width} = Dimensions.get('window');
+const url = 'http://localhost:8080/api/images/type/';
 
 export default class Collection extends React.Component {
   gotoListProduct() {
@@ -15,6 +16,7 @@ export default class Collection extends React.Component {
     navigator.push({name: 'PRODUCTLIST'});
   }
   render() {
+    const {types} = this.props;
     const {wrapper, image, text, cateTitle, cateWrap} = styles;
     return (
       <View style={wrapper}>
@@ -23,27 +25,15 @@ export default class Collection extends React.Component {
         </View>
         <View style={{flex: 4}}>
           <Swiper>
-            <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
-              <ImageBackground style={image} source={littleDress}>
-                <View style={cateWrap}>
-                  <Text style={cateTitle}>Little Dress</Text>
-                </View>
-              </ImageBackground>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
-              <ImageBackground style={image} source={maxiDress}>
-                <View style={cateWrap}>
-                  <Text style={cateTitle}>Maxi Dress</Text>
-                </View>
-              </ImageBackground>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
-              <ImageBackground style={image} source={partyDress}>
-                <View style={cateWrap}>
-                  <Text style={cateTitle}>Party Dress</Text>
-                </View>
-              </ImageBackground>
-            </TouchableOpacity>
+            {types.map(e => (
+              <TouchableOpacity onPress={this.gotoListProduct.bind(this)} key={e.id}>
+                <ImageBackground style={image} source={{url: 'http://localhost:8080/api/images/type/'+ e.image}}>
+                  <View style={cateWrap}>
+                    <Text style={cateTitle}>{e.name}</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
+            ))}
           </Swiper>
         </View>
       </View>
@@ -63,7 +53,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   image: {
-    height: imageHeight,
+    height: imageHeight, 
     width: imageWidth,
   },
   text: {

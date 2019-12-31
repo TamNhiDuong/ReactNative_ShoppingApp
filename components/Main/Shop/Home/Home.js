@@ -8,13 +8,14 @@ import ProductList from '../ProductList/ProductList';
 
 export default class Home extends React.Component {
   render() {
+    const {types} = this.props;
     return (
       <CustomComponents.Navigator
         initialRoute={{name: 'HOMEVIEW'}}
         renderScene={(route, navigator) => {
-        switch(route.name) {
+        switch(route.name) { 
             case 'HOMEVIEW':
-              return <HomeView navigator={navigator} />;
+              return <HomeView navigator={navigator} types={types} />;
             case 'PRODUCTLIST':
               return <ProductList navigator={navigator} />;
             default:

@@ -21,7 +21,18 @@ import contactIcon0 from '../../../images/appIcon/contact0.png';
 export default class Shop extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {selectedTab: 'home'};
+    this.state = {
+      selectedTab: 'home',
+      types: [],
+    };
+  }
+  componentDidMount() {
+    fetch('http://localhost:8080/api/')
+      .then(res => res.json())
+      .then(resJSON => {
+        const {type} = resJSON;
+        this.setState({types: type});
+      });
   }
   openMenu() {
     const {open} = this.props;
@@ -31,21 +42,22 @@ export default class Shop extends React.Component {
   render() {
     const {icons, title} = styles;
     const {navigation} = this.props;
+    const {selectedTab, types} = this.state;
     return (
       <View style={{flex: 1}}>
         <Header onOpen={this.openMenu.bind(this)} />
         <TabNavigator>
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'home'}
+            selected={selectedTab === 'home'}
             title="Home"
             onPress={() => this.setState({selectedTab: 'home'})}
             renderIcon={() => <Image source={homeIcon0} style={icons} />}
             renderSelectedIcon={() => <Image source={homeIconS} style={icons}/>}
             selectedTitleStyle={title}>
-            <Home navigation={navigation} />
+            <Home navigation={navigation} types={types} />
           </TabNavigator.Item>
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'cart'}
+            selected={selectedTab === 'cart'}
             title="Cart"
             onPress={() => this.setState({selectedTab: 'cart'})}
             renderIcon={() => <Image source={cartIcon0} style={icons} />}
@@ -55,7 +67,7 @@ export default class Shop extends React.Component {
             <Cart />
           </TabNavigator.Item>
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'search'}
+            selected={selectedTab === 'search'}
             title="Search"
             onPress={() => this.setState({selectedTab: 'search'})}
             renderIcon={() => <Image source={searchIcon0} style={icons} />}
@@ -64,7 +76,7 @@ export default class Shop extends React.Component {
             <Search />
           </TabNavigator.Item>
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'contact'}
+            selected={selectedTab === 'contact'}
             title="Contact"
             onPress={() => this.setState({selectedTab: 'contact'})}
             renderIcon={() => <Image source={contactIcon0} style={icons} />}
