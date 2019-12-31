@@ -7,13 +7,14 @@ import ProductDetails from '../ProductDetails/ProductDetails';
 
 export default class Cart extends React.Component {
   render() {
+    const {cartArray} = this.props;
     return (
       <CustomComponents.Navigator
         initialRoute={{name: 'CARTVIEW'}}
         renderScene={(route, navigator) => {
         switch(route.name) {
             case 'CARTVIEW':
-              return <CartView navigator={navigator} />;
+              return <CartView navigator={navigator} cartArray={cartArray}/>;
             default:
               return <ProductDetails navigator={navigator} />;
         }

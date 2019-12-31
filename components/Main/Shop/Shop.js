@@ -8,6 +8,7 @@ import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Header from './Header';
 import ProductList from './ProductList/ProductList';
+import global from '../../global';
 
 import homeIconS from '../../../images/appIcon/home.png';
 import homeIcon0 from '../../../images/appIcon/home0.png';
@@ -25,7 +26,12 @@ export default class Shop extends React.Component {
       selectedTab: 'home',
       types: [],
       topProducts: [],
+      cartArray: [],
     };
+    global.addProductToCart = this.addProductToCart.bind(this);
+  }
+  addProductToCart(product) {
+    this.setState({cartArray: this.state.cartArray.concat(product)});
   }
   componentDidMount() {
     fetch('http://localhost:8080/api/')
@@ -43,7 +49,7 @@ export default class Shop extends React.Component {
   render() {
     const {icons, title} = styles;
     const {navigation} = this.props;
-    const {selectedTab, types, topProducts} = this.state;
+    const {selectedTab, types, topProducts, cartArray} = this.state;
     return (
       <View style={{flex: 1}}>
         <Header onOpen={this.openMenu.bind(this)} />
@@ -67,9 +73,9 @@ export default class Shop extends React.Component {
             onPress={() => this.setState({selectedTab: 'cart'})}
             renderIcon={() => <Image source={cartIcon0} style={icons} />}
             renderSelectedIcon={() => <Image source={cartIconS} style={icons} />}
-            badgeText="1"
+            badgeText={cartArray.length}
             selectedTitleStyle={title}>
-            <Cart />
+            <Cart cartArray={cartArray}/>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={selectedTab === 'search'}
