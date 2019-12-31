@@ -10,9 +10,9 @@ import color from '../../../GlobalStyles/color';
 
 const url = 'http://localhost:8080/api/images/product/';
 export default class TopProduct extends React.Component {
-  gotoProductDetails() {
+  gotoProductDetails(product) {
     const { navigator } = this.props;
-    navigator.push({ name: 'PRODUCTDETAILS' });
+    navigator.push({ name: 'PRODUCTDETAILS', product });
   }
   render() {
     const {
@@ -22,11 +22,9 @@ export default class TopProduct extends React.Component {
       body,
       productContainer,
       product,
-      price,
+      priceStyle,
       productName,
     } = styles;
-    const { topProducts } = this.props;
-    console.log(topProducts);
 
     return (
       <View style={container}>
@@ -35,14 +33,17 @@ export default class TopProduct extends React.Component {
         </View>
 
         <View style={body}>
-          {topProducts.map(e => (
-            <TouchableOpacity key={e.id} style={productContainer} onPress={this.gotoProductDetails.bind(this)}>
+          {this.props.topProducts.map(e => (
+            <TouchableOpacity 
+              key={e.id} 
+              style={productContainer} 
+              onPress={() => this.gotoProductDetails(e)}>
               <Image 
                 source={{ url: 'http://localhost:8080/api/images/product/' + e.images[0]}}
                 style={product}
               />
-              <Text style={productName}>{e.name}</Text>
-              <Text style={price}>{e.price}€</Text>
+              <Text style={productName}>{e.name.toUpperCase()}</Text>
+              <Text style={priceStyle}>{e.price}€</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     width: productWidth,
     height: productHeight,
   },
-  price: {
+  priceStyle: {
     color: '#B10D65',
     fontWeight: '600',
     paddingLeft: 20,

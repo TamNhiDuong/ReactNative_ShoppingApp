@@ -25,7 +25,7 @@ export default class Home extends React.Component {
             case 'PRODUCTLIST':
               return <ProductList navigator={navigator} />;
             default:
-              return <ProductDetails navigator={navigator} />;
+              return <ProductDetails navigator={navigator} product={route.product}/>;
         }
       }}
       />

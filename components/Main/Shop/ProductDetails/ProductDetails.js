@@ -22,6 +22,7 @@ export default class ProductDetails extends Component {
       textSmoke, textHighlight, textMain, titleContainer,
       descContainer, productImageStyle, descStyle, txtMaterial, txtColor
     } = styles;
+    const {name, id, price, color, material, description, images} = this.props.product;
     return (
       <View style={wrapper}>
         <View style={cardStyle}>
@@ -35,25 +36,29 @@ export default class ProductDetails extends Component {
           </View>
           <View style={imageContainer}>
             <ScrollView style={{ flexDirection: 'row', padding: 10, height: swiperHeight }} horizontal >
-              <Image source={img1} style={productImageStyle} />
-              <Image source={img2} style={productImageStyle} />
+              <Image 
+                style={productImageStyle}
+                source={{url: 'http://localhost:8080/api/images/product/'+ images[0]}} />
+              <Image 
+                style={productImageStyle} 
+                source={{url: 'http://localhost:8080/api/images/product/'+ images[1]}} />
             </ScrollView>
           </View>
           <View style={footer}>
-            <View style={titleContainer}>
+            <View style={titleContainer}> 
               <Text style={textMain}>
-                <Text style={textBlack}>{'back of the'.toUpperCase()}</Text>
+                <Text style={textBlack}>{name.toUpperCase()}</Text>
                 <Text style={textHighlight}> / </Text>
-                <Text style={textSmoke}>100$</Text>
+                <Text style={textSmoke}>{price}€</Text>
               </Text>
             </View>
             <View style={descContainer}>
-              <Text style={descStyle}>A delicate layer of eyelash lace brings dreamy elegance to this piece, while smooth, lightweight lining feels luxurious against your skin. We love it with heels for a look that fits in on date night, or with cool booties to add an edge.</Text>
+              <Text style={descStyle}>{description}</Text>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 15 }}>
-                <Text style={txtMaterial}>Material Fur</Text>
+                <Text style={txtMaterial}>Material {material}</Text>
                 <View style={{ flexDirection: 'row' }} >
-                  <Text style={txtColor}>Color Black</Text>
-                  <View style={{ height: 15, width: 15, backgroundColor: 'black'.toLowerCase(), borderRadius: 15, marginLeft: 10, borderWidth: 1, borderColor: '#C21C70' }} />
+                  <Text style={txtColor}>Color {color}</Text>
+                  <View style={{ height: 15, width: 15, backgroundColor: color.toLowerCase(), borderRadius: 15, marginLeft: 10, borderWidth: 1, borderColor: '#C21C70' }} />
                 </View>
               </View>
             </View>
