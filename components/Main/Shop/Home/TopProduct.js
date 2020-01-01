@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity, ListView } from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 
 import product1 from '../../../../images/temp/product1.jpeg';
 import product2 from '../../../../images/temp/product2.jpeg';
@@ -32,21 +32,24 @@ export default class TopProduct extends React.Component {
           <Text style={title}>TOP PRODUCT</Text>
         </View>
 
-        <View style={body}>
-          {this.props.topProducts.map(e => (
-            <TouchableOpacity 
-              key={e.id} 
-              style={productContainer} 
-              onPress={() => this.gotoProductDetails(e)}>
-              <Image 
-                source={{ url: 'http://localhost:8080/api/images/product/' + e.images[0]}}
+        <FlatList
+          data={this.props.topProducts}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              key={item.id}
+              style={productContainer}
+              onPress={() => this.gotoProductDetails(item)}>
+              <Image
+                source={{ url: 'http://localhost:8080/api/images/product/' + item.images[0] }}
                 style={product}
               />
-              <Text style={productName}>{e.name.toUpperCase()}</Text>
-              <Text style={priceStyle}>{e.price}€</Text>
+              <Text style={productName}>{item.name.toUpperCase()}</Text>
+              <Text style={priceStyle}>{item.price}€</Text>
             </TouchableOpacity>
-          ))}
-        </View>
+          )}
+        />
+
       </View>
     );
   }
@@ -54,7 +57,7 @@ export default class TopProduct extends React.Component {
 //361/452
 const { width, height } = Dimensions.get('window');
 const productWidth = (width - 50) / 2;
-const productHeight = (productWidth * 452) / 361;
+const productHeight = (productWidth / 361) * 452;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -75,12 +78,15 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
     paddingBottom: 10,
+    justifyContent: 'space-around',
   },
   productContainer: {
     width: productWidth,
     paddingBottom: 20,
+    flex: 1,
+    margin: 5,
+    alignItems: 'center',
   },
   product: {
     width: productWidth,

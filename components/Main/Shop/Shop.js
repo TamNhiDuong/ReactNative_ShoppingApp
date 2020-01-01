@@ -30,9 +30,7 @@ export default class Shop extends React.Component {
     };
     global.addProductToCart = this.addProductToCart.bind(this);
   }
-  addProductToCart(product) {
-    this.setState({cartArray: this.state.cartArray.concat(product)});
-  }
+
   componentDidMount() {
     fetch('http://localhost:8080/api/')
       .then(res => res.json())
@@ -40,6 +38,9 @@ export default class Shop extends React.Component {
         const {type, product} = resJSON;
         this.setState({types: type, topProducts: product});
       });
+  }
+  addProductToCart(product) {
+    this.setState({cartArray: this.state.cartArray.concat({product: product, quantity: 1})});
   }
   openMenu() {
     const {open} = this.props;

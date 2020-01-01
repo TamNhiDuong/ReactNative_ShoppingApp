@@ -6,7 +6,6 @@ import icMenu from '../../../images/appIcon/ic_menu.png';
 import icLogo from '../../../images/appIcon/ic_logo.png';
 import dress from '../../../images/appIcon/dress.png';
 import dress1 from '../../../images/appIcon/dress1.png';
-import dress2 from '../../../images/appIcon/dress2.png';
 
 //onPress={this.props.onOpen}
 //onPress={this.toggleDrawer.bind(this)}
@@ -22,8 +21,8 @@ export default class Header extends Component {
           <TouchableOpacity onPress={this.props.onOpen}>
             <Image source={icMenu} style={icons} />
           </TouchableOpacity>
-          <Text style={title}>Wearing a dress</Text>
-          <Image source={dress} style={logo} />
+          <Text style={title}>Uniquely You</Text>
+          <Image source={dress1} style={logo} />
         </View>
         <TextInput style={input} placeholder="What do you want to buy?"/>
       </View>
@@ -44,8 +43,8 @@ const styles = StyleSheet.create({
   logo: {height: 85, width: 45},
   title: { 
     color: '#FFF',
-    fontSize: 22,
-    paddingTop: 15,
+    fontSize: 21,
+    paddingTop: 23,
     fontFamily: 'Zapfino',
   },
 });

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
-  View, Text, TouchableOpacity, ScrollView,
-  Dimensions, StyleSheet, Image
+  View, Text, TouchableOpacity,
+  Dimensions, StyleSheet, Image, FlatList
 } from 'react-native';
-
-import product1 from '../../../../images/temp/product1.jpeg';
 
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -17,33 +15,34 @@ class CartView extends Component {
   }
   render() {
     const { cartArray } = this.props;
-    console.log("Cart", cartArray); 
+    console.log("Cart", cartArray);
     const { main, checkoutButton, checkoutTitle, wrapper,
       product, mainRight, productController,
       txtName, txtPrice, productImage, numberOfProduct,
       txtShowDetail, showDetailContainer } = styles;
     return (
       <View style={wrapper}>
-        <ScrollView style={main}>
-          {cartArray.map(productinCart => (
+        <FlatList
+          data={cartArray}
+          renderItem={({ item }) => (
             <View style={product}>
-              <Image source={product1} style={productImage} />
+              <Image source={{ url: 'http://localhost:8080/api/images/product/' + item.product.images[0]}} style={productImage} />
               <View style={[mainRight]}>
                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                  <Text style={txtName}>{toTitleCase('black of the')}</Text>
+                  <Text style={txtName}>{toTitleCase(item.product.name)}</Text>
                   <TouchableOpacity>
                     <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                   </TouchableOpacity>
                 </View>
                 <View>
-                  <Text style={txtPrice}>{100}$</Text>
+                  <Text style={txtPrice}>{item.product.price}€</Text>
                 </View>
                 <View style={productController}>
                   <View style={numberOfProduct}>
                     <TouchableOpacity>
                       <Text>+</Text>
                     </TouchableOpacity>
-                    <Text>{3}</Text>
+                    <Text>{item.quantity}</Text>
                     <TouchableOpacity>
                       <Text>-</Text>
                     </TouchableOpacity>
@@ -54,8 +53,9 @@ class CartView extends Component {
                 </View>
               </View>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
+
         <TouchableOpacity style={checkoutButton}>
           <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
         </TouchableOpacity>
