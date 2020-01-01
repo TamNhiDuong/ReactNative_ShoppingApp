@@ -9,7 +9,7 @@ import img2 from '../../../../images/temp/product4.jpeg';
 
 const back = require('../../../../images/appIcon/back.png');
 const cart = require('../../../../images/appIcon/cartfull.png');
-
+ 
 export default class ProductDetails extends Component {
   goBack() {
     const { navigator } = this.props;

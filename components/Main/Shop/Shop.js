@@ -10,6 +10,8 @@ import Header from './Header';
 import ProductList from './ProductList/ProductList';
 import global from '../../global';
 
+import initData from '../../../api/initData';
+
 import homeIconS from '../../../images/appIcon/home.png';
 import homeIcon0 from '../../../images/appIcon/home0.png';
 import cartIconS from '../../../images/appIcon/cart.png';
@@ -32,12 +34,10 @@ export default class Shop extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/api/')
-      .then(res => res.json())
-      .then(resJSON => {
-        const {type, product} = resJSON;
-        this.setState({types: type, topProducts: product});
-      });
+    initData().then(resJSON => {
+      const {type, product} = resJSON;
+      this.setState({types: type, topProducts: product});
+    });
   }
   addProductToCart(product) {
     this.setState({cartArray: this.state.cartArray.concat({product: product, quantity: 1})});
