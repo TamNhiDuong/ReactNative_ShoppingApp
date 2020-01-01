@@ -11,6 +11,7 @@ import ProductList from './ProductList/ProductList';
 import global from '../../global';
 
 import initData from '../../../api/initData';
+import saveCart from '../../../api/saveCart';
 
 import homeIconS from '../../../images/appIcon/home.png';
 import homeIcon0 from '../../../images/appIcon/home0.png';
@@ -20,6 +21,7 @@ import searchIconS from '../../../images/appIcon/search.png';
 import searchIcon0 from '../../../images/appIcon/search0.png';
 import contactIconS from '../../../images/appIcon/contact.png';
 import contactIcon0 from '../../../images/appIcon/contact0.png';
+import getCart from '../../../api/getCart';
 
 export default class Shop extends React.Component {
   constructor(props) {
@@ -38,9 +40,14 @@ export default class Shop extends React.Component {
       const {type, product} = resJSON;
       this.setState({types: type, topProducts: product});
     });
+    getCart()
+    .then(cartArray => this.setState({cartArray}));
   }
   addProductToCart(product) {
-    this.setState({cartArray: this.state.cartArray.concat({product: product, quantity: 1})});
+    this.setState(
+      {cartArray: this.state.cartArray.concat({product: product, quantity: 1})},
+      () => saveCart(this.state.cartArray),
+    );
   }
   openMenu() {
     const {open} = this.props;
