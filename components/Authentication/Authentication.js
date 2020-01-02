@@ -4,10 +4,17 @@ import {Text, View, TouchableOpacity, Image, StyleSheet, Dimensions, TextInput} 
 import icBack from '../../images/appIcon/back_white.png';
 import icLogo from '../../images/appIcon/ic_logo.png';
 
+import register from '../../api/register';
+
 export default class Authentication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {isSignIn: true};
+  }
+
+  componentDidMount() {
+    register('tanja@gmail.com', 'tanja', '123')
+    .then(res => console.log(res));
   }
 
   signIn = () => {

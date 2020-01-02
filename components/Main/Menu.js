@@ -6,7 +6,7 @@ import profileIcon from '../../images/temp/profile.png';
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLogIn: true};
+    this.state = {isLogIn: false};
   }
   render() {
     const {
