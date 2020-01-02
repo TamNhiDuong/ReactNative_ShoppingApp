@@ -4,11 +4,16 @@ import {
   Dimensions, StyleSheet, Image, FlatList
 } from 'react-native';
 
+import global from '../../../global';
+
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
 class CartView extends Component {
+  incrQuantity(id) {
+    global.incrQuantity(id);
+  }
   gotoDetail() {
     const { navigator } = this.props;
     navigator.push({ name: 'PRODUCTDETAILS' });
@@ -39,7 +44,7 @@ class CartView extends Component {
                 </View>
                 <View style={productController}>
                   <View style={numberOfProduct}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.incrQuantity(item.product.id)}>
                       <Text>+</Text>
                     </TouchableOpacity>
                     <Text>{item.quantity}</Text>
