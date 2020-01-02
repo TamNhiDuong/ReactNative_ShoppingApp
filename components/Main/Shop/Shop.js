@@ -34,6 +34,7 @@ export default class Shop extends React.Component {
     };
     global.addProductToCart = this.addProductToCart.bind(this);
     global.incrQuantity = this.incrQuantity.bind(this);
+    global.decrQuantity = this.decrQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -57,7 +58,14 @@ export default class Shop extends React.Component {
       if (e.product.id !== productId) return e;
       return {product: e.product, quantity: e.quantity + 1};
     });
-    this.setState({cartArray: newCart});
+    this.setState({cartArray: newCart}, () => saveCart(this.state.cartArray));
+  }
+  decrQuantity(productId) {
+    const newArray = this.state.cartArray.map(e => {
+      if (e.product.id !== productId) return e;
+      return {product: e.product, quantity: e.quantity - 1};
+    });
+    this.setState({cartArray: newArray}, () => saveCart(this.state.cartArray));
   }
   openMenu() {
     const {open} = this.props;

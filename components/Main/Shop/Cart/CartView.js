@@ -14,6 +14,9 @@ class CartView extends Component {
   incrQuantity(id) {
     global.incrQuantity(id);
   }
+  decrQuantity(id) {
+    global.decrQuantity(id);
+  }
   gotoDetail() {
     const { navigator } = this.props;
     navigator.push({ name: 'PRODUCTDETAILS' });
@@ -48,7 +51,7 @@ class CartView extends Component {
                       <Text>+</Text>
                     </TouchableOpacity>
                     <Text>{item.quantity}</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.decrQuantity(item.product.id)}>
                       <Text>-</Text>
                     </TouchableOpacity>
                   </View>
