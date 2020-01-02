@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TextInput, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 
 import register from '../../api/register'; 
 export default class SignUp extends React.Component {
@@ -16,8 +16,26 @@ export default class SignUp extends React.Component {
   register() {
     const {email, name, password} = this.state;
     register(email, name, password).then(res => {
-      console.log(res);
+      if (res === 'THANH_CONG') return this.onSuccess();
+      return this.onFail();
     });
+  }
+  onSuccess() {
+    Alert.alert(
+      'NOTICE',
+      'Sign up successfully',
+      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      {cancelable: false},
+    );
+  }
+
+  onFail() {
+    Alert.alert(
+      'NOTICE',
+      'Sign up unsuccessfully',
+      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      {cancelable: false},
+    );
   }
 
   render() {
