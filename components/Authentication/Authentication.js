@@ -2,9 +2,11 @@ import React from 'react';
 import {Text, View, TouchableOpacity, Image, StyleSheet, Dimensions, TextInput} from 'react-native';
 
 import icBack from '../../images/appIcon/back_white.png';
-import icLogo from '../../images/appIcon/ic_logo.png';
+import icLogo from '../../images/appIcon/dress1.png';
 
 import register from '../../api/register';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 export default class Authentication extends React.Component {
   constructor(props) {
@@ -36,32 +38,11 @@ export default class Authentication extends React.Component {
       signOutStyle,
       activeStyle,
       inactiveStyle,
-      inputStyle,
-      bigButton,
-      textStyle,
+      logoStyle
     } = styles;
     const {isSignIn} = this.state;
-    const signInJSX = (
-      <View>
-        <TextInput placeholder="Enter your email" style={inputStyle} />
-        <TextInput placeholder="Enter your password" style={inputStyle} />
-        <TouchableOpacity style={bigButton}>
-          <Text style={textStyle}>SIGN IN NOW</Text>
-        </TouchableOpacity>
-      </View>
-    );
-    const signUpJSX = (
-      <View>
-        <TextInput placeholder="Enter your name" style={inputStyle} />
-        <TextInput placeholder="Enter your email" style={inputStyle} />
-        <TextInput placeholder="Enter your password" style={inputStyle} />
-        <TextInput placeholder="Re-enter your password" style={inputStyle} />
-        <TouchableOpacity style={bigButton}>
-          <Text style={textStyle}>SIGN UP NOW</Text>
-        </TouchableOpacity>
-      </View>
-    );
-    const mainJSX = this.state.isSignIn ? signInJSX : signUpJSX;
+
+    const mainJSX = this.state.isSignIn ? <SignIn /> : <SignUp />;
     return (
       <View style={wrapper}>
         <View style={row1}>
@@ -69,8 +50,8 @@ export default class Authentication extends React.Component {
             onPress={() => this.props.navigation.navigate('MAIN')}>
             <Image source={icBack} style={icons} />
           </TouchableOpacity>
-          <Text style={title}>Wearing a dress</Text>
-          <Image source={icLogo} style={icons} />
+          <Text style={title}>Uniquely You</Text>
+          <Image source={icLogo} style={logoStyle} />
         </View>
 
         {mainJSX}
@@ -106,9 +87,9 @@ const styles = StyleSheet.create({
   icons: {height: 25, width: 25},
   title: {
     color: '#FFF',
-    fontSize: 22,
-    paddingTop: 15,
+    fontSize: 21,
     fontFamily: 'Zapfino',
+    paddingTop: 23,
   },
   controlStyle: {
     flexDirection: 'row',
@@ -157,5 +138,9 @@ const styles = StyleSheet.create({
   textStyle: {
     color: '#fff',
     fontSize: 20,
+  },
+  logoStyle: {
+    height: 85,
+    width: 45,
   }
 });
