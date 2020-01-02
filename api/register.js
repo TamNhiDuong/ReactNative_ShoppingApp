@@ -6,7 +6,7 @@ const register = (email, name, password) => (
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
-    body: JSON.stringify({email, name, password})
+    body: JSON.stringify({email, name, password}),
   }).then(res => res.text())
 );
 module.exports = register;

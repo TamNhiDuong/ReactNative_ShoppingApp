@@ -1,16 +1,37 @@
 import React from 'react';
 import {View, TextInput, Text, TouchableOpacity, StyleSheet} from 'react-native';
+
+import signIn from '../../api/signIn';
 export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {email: '', password: ''};
+  }
+  onSignIn() {
+    const {email, password} = this.state;
+    signIn(email, password)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   }
   render() {
     const {inputStyle, bigButton, textStyle} = styles;
     return (
       <View>
-        <TextInput placeholder="Enter your email" style={inputStyle} />
-        <TextInput placeholder="Enter your password" style={inputStyle} />
-        <TouchableOpacity style={bigButton}>
+        <TextInput 
+          placeholder="Enter your email" 
+          style={inputStyle} 
+          value={this.state.email}
+          onChangeText={text => this.setState({email: text})}
+        />
+        <TextInput 
+          placeholder="Enter your password" 
+          style={inputStyle} 
+          value={this.state.password}
+          onChangeText={text => this.setState({password: text})}
+        />
+        <TouchableOpacity style={bigButton} onPress={this.onSignIn.bind(this)}>
           <Text style={textStyle}>SIGN IN NOW</Text>
         </TouchableOpacity>
       </View>
