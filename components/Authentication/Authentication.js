@@ -19,6 +19,10 @@ export default class Authentication extends React.Component {
     .then(res => console.log(res));
   }
 
+  goToSignIn() {
+    this.setState({isSignIn: true});
+  }
+
   signIn = () => {
     this.setState({isSignIn: true});
   };
@@ -42,7 +46,7 @@ export default class Authentication extends React.Component {
     } = styles;
     const {isSignIn} = this.state;
 
-    const mainJSX = this.state.isSignIn ? <SignIn /> : <SignUp />;
+    const mainJSX = this.state.isSignIn ? <SignIn /> : <SignUp goToSignIn={this.goToSignIn.bind(this)}/>;
     return (
       <View style={wrapper}>
         <View style={row1}>

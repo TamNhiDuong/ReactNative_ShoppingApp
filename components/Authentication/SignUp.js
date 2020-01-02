@@ -24,7 +24,7 @@ export default class SignUp extends React.Component {
     Alert.alert(
       'NOTICE',
       'Sign up successfully',
-      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      [{text: 'OK', onPress: this.props.goToSignIn()}],
       {cancelable: false},
     );
   }
@@ -32,8 +32,8 @@ export default class SignUp extends React.Component {
   onFail() {
     Alert.alert(
       'NOTICE',
-      'Sign up unsuccessfully',
-      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      'Email was used by other user',
+      [{text: 'OK', onPress: () => this.setState({email: ''})}],
       {cancelable: false},
     );
   }
