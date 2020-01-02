@@ -17,6 +17,9 @@ class CartView extends Component {
   decrQuantity(id) {
     global.decrQuantity(id);
   }
+  removeItem(id) {
+    global.removeItem(id);
+  }
   gotoDetail() {
     const { navigator } = this.props;
     navigator.push({ name: 'PRODUCTDETAILS' });
@@ -38,7 +41,7 @@ class CartView extends Component {
               <View style={[mainRight]}>
                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                   <Text style={txtName}>{toTitleCase(item.product.name)}</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.removeItem(item.product.id)}>
                     <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                   </TouchableOpacity>
                 </View>
