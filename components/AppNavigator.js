@@ -7,7 +7,6 @@ import ChangeInfor from './ChangeInfor/ChangeInfor';
 import Main from './Main/Main';
 import OrderHistory from './OrderHistory/OrderHistory'; 
 import Menu from '../components/Main/Menu'; 
-import Contact from '../components/Contact/Contact';
 
 import ProductDetails from './Main/Shop/ProductDetails/ProductDetails';
 import ProductList from './Main/Shop/ProductList/ProductList';
@@ -21,7 +20,6 @@ const AppNavigator = createStackNavigator(
     MENU: {screen: Menu},
     PRODUCTDETAILS: {screen: ProductDetails},
     PRODUCTLIST: {screen: ProductList},
-    CONTACT: {screen: Contact},
   },
   {
     initialRouteName: 'MAIN',

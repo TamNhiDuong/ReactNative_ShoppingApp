@@ -40,8 +40,9 @@ export default class Authentication extends React.Component {
       logoStyle
     } = styles;
     const {isSignIn} = this.state;
+    const {navigation} = this.props;
 
-    const mainJSX = this.state.isSignIn ? <SignIn /> : <SignUp goToSignIn={this.goToSignIn.bind(this)}/>;
+    const mainJSX = this.state.isSignIn ? <SignIn navigation={navigation}/> : <SignUp goToSignIn={this.goToSignIn.bind(this)}/>;
     return (
       <View style={wrapper}>
         <View style={row1}>

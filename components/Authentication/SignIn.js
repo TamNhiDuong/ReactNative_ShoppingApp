@@ -12,7 +12,10 @@ export default class SignIn extends React.Component {
   onSignIn() {
     const {email, password} = this.state;
     signIn(email, password)
-      .then(res => global.changeMenu(res.user))
+      .then(res => {
+        global.changeMenu(res.user);
+        this.props.navigation.navigate('MAIN');
+      })
       .catch(err => console.log(err));
   }
   render() {

@@ -35,7 +35,7 @@ export default class Menu extends React.Component {
     );
     const signInJSX = (
       <View style={smallContainer}>
-        <Text style={nameText}>{this.state.userName}</Text>
+        <Text style={nameText}>{this.state.isLogIn ? this.state.userName : ''}</Text>
         <View>
           <TouchableOpacity
             style={btnStyle}
