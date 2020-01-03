@@ -14,11 +14,6 @@ export default class Authentication extends React.Component {
     this.state = {isSignIn: true};
   }
 
-  componentDidMount() {
-    register('tanja@gmail.com', 'tanja', '123')
-    .then(res => console.log(res));
-  }
-
   goToSignIn() {
     this.setState({isSignIn: true});
   }

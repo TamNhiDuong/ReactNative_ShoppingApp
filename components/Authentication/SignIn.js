@@ -2,6 +2,8 @@ import React from 'react';
 import {View, TextInput, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import signIn from '../../api/signIn';
+import global from '../global';
+
 export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -10,9 +12,7 @@ export default class SignIn extends React.Component {
   onSignIn() {
     const {email, password} = this.state;
     signIn(email, password)
-      .then(res => {
-        console.log(res);
-      })
+      .then(res => global.changeMenu(res.user))
       .catch(err => console.log(err));
   }
   render() {
@@ -30,6 +30,7 @@ export default class SignIn extends React.Component {
           style={inputStyle} 
           value={this.state.password}
           onChangeText={text => this.setState({password: text})}
+          secureTextEntry
         />
         <TouchableOpacity style={bigButton} onPress={this.onSignIn.bind(this)}>
           <Text style={textStyle}>SIGN IN NOW</Text>

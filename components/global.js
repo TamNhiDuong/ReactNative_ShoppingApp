@@ -3,4 +3,5 @@ module.exports = {
     incrQuantity: null,
     decrQuantity: null,
     removeItem:  null,
+    changeMenu: null,
 }

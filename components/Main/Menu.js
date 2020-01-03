@@ -3,10 +3,17 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 import profileIcon from '../../images/temp/profile.png';
 
+import global from '../global';
+
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLogIn: false};
+    this.state = {isLogIn: false, userName: ''};
+    global.changeMenu = this.changeMenu.bind(this);
+  } 
+
+  changeMenu(user) {
+    this.setState({isLogIn: true, userName: user.name});
   }
   render() {
     const {
@@ -15,7 +22,7 @@ export default class Menu extends React.Component {
       btnStyle,
       btnText,
       smallContainer,
-      nameText,
+      nameText, 
     } = styles;
     const notSignInJSX = (
       <View>
@@ -28,7 +35,7 @@ export default class Menu extends React.Component {
     );
     const signInJSX = (
       <View style={smallContainer}>
-        <Text style={nameText}>Tanja D</Text>
+        <Text style={nameText}>{this.state.userName}</Text>
         <View>
           <TouchableOpacity
             style={btnStyle}
