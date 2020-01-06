@@ -1,18 +1,19 @@
+//React-native
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-
+//Components
 import Home from './Home/Home';
 import Contact from './Contact/Contact';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Header from './Header';
-import ProductList from './ProductList/ProductList';
 import global from '../../global';
-
+//API
 import initData from '../../../api/initData';
 import saveCart from '../../../api/saveCart';
-
+import getCart from '../../../api/getCart';
+//Icons
 import homeIconS from '../../../images/appIcon/home.png';
 import homeIcon0 from '../../../images/appIcon/home0.png';
 import cartIconS from '../../../images/appIcon/cart.png';
@@ -21,7 +22,7 @@ import searchIconS from '../../../images/appIcon/search.png';
 import searchIcon0 from '../../../images/appIcon/search0.png';
 import contactIconS from '../../../images/appIcon/contact.png';
 import contactIcon0 from '../../../images/appIcon/contact0.png';
-import getCart from '../../../api/getCart';
+
 
 export default class Shop extends React.Component {
   constructor(props) {

@@ -4,8 +4,6 @@ import {
 } from 'react-native';
 
 import global from '../../../global';
-import img1 from '../../../../images/temp/product5.jpeg';
-import img2 from '../../../../images/temp/product4.jpeg';
 
 const back = require('../../../../images/appIcon/back.png');
 const cart = require('../../../../images/appIcon/cartfull.png');
