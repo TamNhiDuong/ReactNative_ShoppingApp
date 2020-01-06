@@ -13,6 +13,7 @@ OR
 react-native run-android
 
 __Demonstration__
+
 Homepage
 
 ![Screenshot](images/UI/homepage.png)
