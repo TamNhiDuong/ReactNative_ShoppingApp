@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 
 import {
-  View, TouchableOpacity, Text, Image, StyleSheet, TextInput, Dimensions
+  View, TouchableOpacity, Text, Image, StyleSheet, TextInput, Dimensions, Alert
 } from 'react-native';
 
 import backSpecial from '../../images/appIcon/backs.png';
 
 import changeInforAPI from '../../api/changeInforAPI';
 import getToken from '../../api/getToken';
+
+import global from '../global';
 
 export default class ChangeInfor extends Component {
   constructor(props) {
@@ -19,12 +21,30 @@ export default class ChangeInfor extends Component {
       txtPhone: navigation.getParam('userPhone'),
     };
   }
+
   changeUserInfor() {
     const {txtName, txtAddress, txtPhone} = this.state;
     getToken()
       .then(resToken => changeInforAPI(resToken, txtName, txtPhone, txtAddress))
-      .then(user => console.log('user' + user))
+      .then(user => {
+        this.alertSucess();
+        global.changeMenu(user);
+      })
       .catch(err => console.log(err));
+  }
+
+  goToMain() {
+    const {navigation} = this.props;
+    navigation.navigate('MAIN');
+  }
+
+  alertSucess() {
+    Alert.alert(
+      'NOTICE',
+      'Change infor successfully',
+      [{text: 'OK', onPress: this.goToMain.bind(this)}],
+      {cancelable: false},
+    );
   }
 
   render() {
