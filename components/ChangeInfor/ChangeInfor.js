@@ -7,10 +7,11 @@ import backSpecial from '../../images/appIcon/backs.png';
 export default class ChangeInfor extends Component {
   constructor(props) {
     super(props);
+    const {navigation} = this.props;
     this.state = {
-      txtName: 'Tanja D',
-      txtAddress: 'Kilonrinne 10',
-      txtPhone: '0469664201'
+      txtName: navigation.getParam('userName'),
+      txtAddress: navigation.getParam('userAddress'),
+      txtPhone: navigation.getParam('userPhone'),
     };
   }
 

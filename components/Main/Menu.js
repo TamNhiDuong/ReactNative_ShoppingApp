@@ -10,10 +10,12 @@ import saveToken from '../../api/saveToken';
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLogIn: false, user: null};
+    this.state = {
+      isLogIn: false,
+      user: null,
+    };
     global.changeMenu = this.changeMenu.bind(this);
-  } 
-
+  }
   changeMenu(user) {
     this.setState({isLogIn: true, user: user});
   }
@@ -51,7 +53,14 @@ export default class Menu extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={btnStyle}
-            onPress={() => this.props.navigation.navigate('CHANGEINFOR')}>
+            onPress={() =>
+              this.props.navigation.navigate('CHANGEINFOR', {
+                userName: this.state.user.name,
+                userEmail: this.state.user.email,
+                userPhone: this.state.user.phone,
+                userAddress: this.state.user.address,
+              })
+            }>
             <Text style={btnText}>Change Infor</Text>
           </TouchableOpacity>
           <TouchableOpacity

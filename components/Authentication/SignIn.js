@@ -29,7 +29,7 @@ export default class SignIn extends React.Component {
     const {inputStyle, bigButton, textStyle} = styles;
     return (
       <View>
-        <TextInput 
+        <TextInput   
           placeholder="Enter your email" 
           style={inputStyle} 
           value={this.state.email}
