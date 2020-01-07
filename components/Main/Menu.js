@@ -5,6 +5,8 @@ import profileIcon from '../../images/temp/profile.png';
 
 import global from '../global';
 
+import saveToken from '../../api/saveToken';
+
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,11 @@ export default class Menu extends React.Component {
   changeMenu(user) {
     this.setState({isLogIn: true, userName: user.name});
   }
+  onSignOut() {
+    this.setState({userName: null, isLogIn: false});
+    saveToken('');
+  }
+
   render() {
     const {
       container,
@@ -49,12 +56,7 @@ export default class Menu extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={btnStyle}
-            onPress={() => this.props.navigation.navigate('CONTACT')}>
-            <Text style={btnText}>Contact</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={btnStyle}
-            onPress={() => this.props.navigation.navigate('AUTHENTICATION')}>
+            onPress={this.onSignOut.bind(this)}>
             <Text style={btnText}>Sign Out</Text>
           </TouchableOpacity>
         </View>
