@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+
 import {
   View, TouchableOpacity, Text, Image, StyleSheet, TextInput, Dimensions
 } from 'react-native';
+
 import backSpecial from '../../images/appIcon/backs.png';
+
+import changeInforAPI from '../../api/changeInforAPI';
+import getToken from '../../api/getToken';
 
 export default class ChangeInfor extends Component {
   constructor(props) {
@@ -14,13 +19,20 @@ export default class ChangeInfor extends Component {
       txtPhone: navigation.getParam('userPhone'),
     };
   }
+  changeUserInfor() {
+    const {txtName, txtAddress, txtPhone} = this.state;
+    getToken()
+      .then(resToken => changeInforAPI(resToken, txtName, txtPhone, txtAddress))
+      .then(user => console.log('user' + user))
+      .catch(err => console.log(err));
+  }
 
   render() {
     const {
       wrapper, header, headerTitle, backIconStyle, body,
       signInContainer, signInTextStyle, textInput
     } = styles;
-    const { txtName, txtAddress, txtPhone } = this.state;
+    const {txtName, txtAddress, txtPhone} = this.state;
     return (
       <View style={wrapper}>
         <View style={header}>
@@ -55,7 +67,7 @@ export default class ChangeInfor extends Component {
             onChangeText={txt => this.setState({ ...this.state, txtPhone: txt })}
             underlineColorAndroid="transparent"
           />
-          <TouchableOpacity style={signInContainer}>
+          <TouchableOpacity style={signInContainer} onPress={this.changeUserInfor.bind(this)}>
             <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>
           </TouchableOpacity>
         </View>
