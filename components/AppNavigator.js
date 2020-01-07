@@ -19,7 +19,7 @@ const AppNavigator = createStackNavigator(
     ORDERHISTORY: {screen: OrderHistory},
     MENU: {screen: Menu},
     PRODUCTDETAILS: {screen: ProductDetails},
-    PRODUCTLIST: {screen: ProductList},
+    PRODUCTLIST: {screen: ProductList}, 
   },
   {
     initialRouteName: 'MAIN',

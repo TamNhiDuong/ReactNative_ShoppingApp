@@ -9,6 +9,7 @@ import Header from './Shop/Header';
 
 import checkToken from '../../api/checkToken';
 import getToken from '../../api/getToken';
+import refreshToken from '../../api/refreshToken';
 
 import global from '../global';
 
@@ -23,9 +24,16 @@ export default class Main extends React.Component {
   };
   componentDidMount() {
     getToken()
-      .then(resToken => checkToken(resToken))
+      .then(resToken => checkToken(resToken)) 
       .then(res => global.changeMenu(res.user))
       .catch(err => console.log('Error:' + err));
+    //Refresh token
+    setInterval(() => {
+      getToken().then(token => refreshToken(token));
+    }, 60 * 1000);
+    setInterval(() => {
+      getToken().then(res => console.log(res));
+    }, 60 * 1000);
   }
   render() {
     const {navigation} = this.props;

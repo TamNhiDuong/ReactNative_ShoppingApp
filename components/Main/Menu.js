@@ -10,12 +10,12 @@ import saveToken from '../../api/saveToken';
 export default class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isLogIn: false, userName: ''};
+    this.state = {isLogIn: false, user: null};
     global.changeMenu = this.changeMenu.bind(this);
   } 
 
   changeMenu(user) {
-    this.setState({isLogIn: true, userName: user.name});
+    this.setState({isLogIn: true, user: user});
   }
   onSignOut() {
     this.setState({userName: null, isLogIn: false});
@@ -42,7 +42,7 @@ export default class Menu extends React.Component {
     );
     const signInJSX = (
       <View style={smallContainer}>
-        <Text style={nameText}>{this.state.isLogIn ? this.state.userName : ''}</Text>
+        <Text style={nameText}>{this.state.isLogIn ? this.state.user.name : ''}</Text>
         <View>
           <TouchableOpacity
             style={btnStyle}

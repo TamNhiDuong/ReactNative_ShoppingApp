@@ -19,7 +19,7 @@ export default class ChangeInfor extends Component {
       wrapper, header, headerTitle, backIconStyle, body,
       signInContainer, signInTextStyle, textInput
     } = styles;
-    const { name, address, phone } = this.state;
+    const { txtName, txtAddress, txtPhone } = this.state;
     return (
       <View style={wrapper}>
         <View style={header}>
@@ -34,22 +34,25 @@ export default class ChangeInfor extends Component {
             style={textInput}
             placeholder="Enter your name"
             autoCapitalize="none"
-            value={name}
-            onChangeText={txtName => this.setState({ ...this.state, txtName })}
+            value={txtName}
+            onChangeText={txt => this.setState({ ...this.state, txtName: txt })}
+            underlineColorAndroid="transparent"
           />
           <TextInput
             style={textInput}
             placeholder="Enter your address"
             autoCapitalize="none"
-            value={address}
-            onChangeText={txtAddress => this.setState({ ...this.state, txtAddress })}
+            value={txtAddress}
+            onChangeText={txt => this.setState({ ...this.state, txtAddress: txt })}
+            underlineColorAndroid="transparent"
           />
           <TextInput
             style={textInput}
             placeholder="Enter your phone number"
             autoCapitalize="none"
-            value={phone}
-            onChangeText={txtPhone => this.setState({ ...this.state, txtPhone })}
+            value={txtPhone}
+            onChangeText={txt => this.setState({ ...this.state, txtPhone: txt })}
+            underlineColorAndroid="transparent"
           />
           <TouchableOpacity style={signInContainer}>
             <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>
