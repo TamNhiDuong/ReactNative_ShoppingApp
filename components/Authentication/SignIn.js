@@ -4,10 +4,16 @@ import {View, TextInput, Text, TouchableOpacity, StyleSheet} from 'react-native'
 import signIn from '../../api/signIn';
 import global from '../global';
 
+import saveToken from '../../api/saveToken';
+import getToken from '../../api/getToken';
+
 export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {email: '', password: ''};
+  }
+  componentDidMount() {
+    getToken().then(a => console.log('Token:' + a));
   }
   onSignIn() {
     const {email, password} = this.state;
@@ -15,6 +21,7 @@ export default class SignIn extends React.Component {
       .then(res => {
         global.changeMenu(res.user);
         this.props.navigation.navigate('MAIN');
+        saveToken(res.token);
       })
       .catch(err => console.log(err));
   }
