@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, FlatList } from 'react-native';
 import Drawer from 'react-native-drawer';
-
-import Header from '../../Shop/Header';
-import Menu from '../../Menu';
 
 import backList from '../../../../images/appIcon/backList.png';
 import product1 from '../../../../images/temp/product1.jpeg';
 
+import productList from '../../../../api/productList';
+
 export default class ProductList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      productList: [],
+    };
+  }
+
   goBack() {
     const { navigator } = this.props;
     navigator.pop();
@@ -17,10 +23,17 @@ export default class ProductList extends Component {
     const { navigator } = this.props;
     navigator.push({ name: 'PRODUCTDETAILS' });
   }
+  componentDidMount() {
+    const {category} = this.props;
+    productList(category.id, 1).then(resJSON => {
+      console.log(resJSON);
+      this.setState({productList: resJSON});
+    });
+  }
   render() {
     const {
       container,
-      wrapper, 
+      wrapper,
       header,
       backStyle,
       titleStyle,
@@ -28,12 +41,12 @@ export default class ProductList extends Component {
       productImage,
       productInfor,
       detailsRow,
-      txtName, txtPrice, txtMaterial, txtColor, txtDetails,
+      txtName, txtPrice, txtMaterial, txtColor,
     } = styles;
-    const {category} = this.props;
+    const { category } = this.props;
     return (
       <View style={container}>
-        <ScrollView style={wrapper}>
+        <View style={wrapper}>
           <View style={header}>
             <TouchableOpacity onPress={this.goBack.bind(this)}>
               <Image source={backList} style={backStyle} />
@@ -41,71 +54,33 @@ export default class ProductList extends Component {
             <Text style={titleStyle}>{category.name}</Text>
             <View style={{ width: 30 }} />
           </View>
-
-          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
-            <View style={productContainer}>
-              <Image style={productImage} source={product1} />
-              <View style={productInfor}>
-                <Text style={txtName}>Lace Sleeve Si</Text>
-                <Text style={txtPrice}>117$</Text>
-                <Text style={txtMaterial}>Material silk</Text>
-                <View style={detailsRow}>
-                  <Text style={txtColor}>Color RoyalBlue</Text>
-                  <View style={{ backgroundColor: 'blue', width: 10, height: 10, borderRadius: 5 }} />
+          <FlatList
+            data={this.state.productList}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => this.gotoProductDetails(item)}>
+                <View style={productContainer}>
+                  <Image 
+                    style={productImage} 
+                    source={{url: 'http://localhost:8080/api/images/product/'+ item.images[0]}}/>
+                  <View style={productInfor}>
+                    <Text style={txtName}>{item.name}</Text>
+                    <Text style={txtPrice}>{item.price}€</Text>
+                    <Text style={txtMaterial}>{item.material}</Text>
+                    <View style={detailsRow}>
+                      <Text style={txtColor}>{item.color}</Text>
+                      <View style={{ backgroundColor: 'blue', width: 10, height: 10, borderRadius: 5 }} />
+                    </View>
+                  </View>
                 </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
-            <View style={productContainer}>
-              <Image style={productImage} source={product1} />
-              <View style={productInfor}>
-                <Text style={txtName}>Lace Sleeve Si</Text>
-                <Text style={txtPrice}>117$</Text>
-                <Text style={txtMaterial}>Material silk</Text>
-                <View style={detailsRow}>
-                  <Text style={txtColor}>Color RoyalBlue</Text>
-                  <View style={{ backgroundColor: 'blue', width: 10, height: 10, borderRadius: 5 }} />
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
-            <View style={productContainer}>
-              <Image style={productImage} source={product1} />
-              <View style={productInfor}>
-                <Text style={txtName}>Lace Sleeve Si</Text>
-                <Text style={txtPrice}>117$</Text>
-                <Text style={txtMaterial}>Material silk</Text>
-                <View style={detailsRow}>
-                  <Text style={txtColor}>Color RoyalBlue</Text>
-                  <View style={{ backgroundColor: 'blue', width: 10, height: 10, borderRadius: 5 }} />
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.gotoProductDetails.bind(this)}>
-            <View style={productContainer}>
-              <Image style={productImage} source={product1} />
-              <View style={productInfor}>
-                <Text style={txtName}>Lace Sleeve Si</Text>
-                <Text style={txtPrice}>117$</Text>
-                <Text style={txtMaterial}>Material silk</Text>
-                <View style={detailsRow}>
-                  <Text style={txtColor}>Color RoyalBlue</Text>
-                  <View style={{ backgroundColor: 'blue', width: 10, height: 10, borderRadius: 5 }} />
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
       </View>
     );
   }
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

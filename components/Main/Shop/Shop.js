@@ -41,7 +41,7 @@ export default class Shop extends React.Component {
 
   componentDidMount() {
     initData().then(resJSON => {
-      const {type, product} = resJSON;
+      const {type, product} = resJSON; 
       this.setState({types: type, topProducts: product});
     });
     getCart()
