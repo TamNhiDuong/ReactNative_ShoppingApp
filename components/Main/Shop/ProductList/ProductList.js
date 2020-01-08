@@ -20,7 +20,7 @@ export default class ProductList extends Component {
   render() {
     const {
       container,
-      wrapper,
+      wrapper, 
       header,
       backStyle,
       titleStyle,
@@ -30,6 +30,7 @@ export default class ProductList extends Component {
       detailsRow,
       txtName, txtPrice, txtMaterial, txtColor, txtDetails,
     } = styles;
+    const {category} = this.props;
     return (
       <View style={container}>
         <ScrollView style={wrapper}>
@@ -37,7 +38,7 @@ export default class ProductList extends Component {
             <TouchableOpacity onPress={this.goBack.bind(this)}>
               <Image source={backList} style={backStyle} />
             </TouchableOpacity>
-            <Text style={titleStyle}>Party Dress</Text>
+            <Text style={titleStyle}>{category.name}</Text>
             <View style={{ width: 30 }} />
           </View>
 

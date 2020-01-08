@@ -6,9 +6,9 @@ const {height, width} = Dimensions.get('window');
 const url = 'http://localhost:8080/api/images/type/';
 
 export default class Collection extends React.Component {
-  gotoListProduct() {
+  gotoListProduct(category) {
     const {navigator} = this.props;
-    navigator.push({name: 'PRODUCTLIST'});
+    navigator.push({name: 'PRODUCTLIST', category});
   }
   render() {
     const {types} = this.props;
@@ -21,8 +21,12 @@ export default class Collection extends React.Component {
         <View style={{flex: 4}}>
           <Swiper>
             {types.map(e => (
-              <TouchableOpacity onPress={this.gotoListProduct.bind(this)} key={e.id}>
-                <ImageBackground style={image} source={{url: 'http://localhost:8080/api/images/type/'+ e.image}}>
+              <TouchableOpacity
+                onPress={() => this.gotoListProduct(e)}
+                key={e.id}>
+                <ImageBackground
+                  style={image}
+                  source={{url: 'http://localhost:8080/api/images/type/'+ e.image}}>
                   <View style={cateWrap}>
                     <Text style={cateTitle}>{e.name}</Text>
                   </View>

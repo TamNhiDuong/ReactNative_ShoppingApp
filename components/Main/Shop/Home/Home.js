@@ -17,13 +17,13 @@ export default class Home extends React.Component {
             case 'HOMEVIEW':
               return (
                 <HomeView
-                  navigator={navigator}
+                  navigator={navigator}  
                   types={types}
                   topProducts={topProducts}
                 />
               );
             case 'PRODUCTLIST':
-              return <ProductList navigator={navigator} />;
+              return <ProductList navigator={navigator} category={route.category} />;
             default:
               return <ProductDetails navigator={navigator} product={route.product}/>;
         }

@@ -1,14 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 
-import product1 from '../../../../images/temp/product1.jpeg';
-import product2 from '../../../../images/temp/product2.jpeg';
-import product3 from '../../../../images/temp/product3.jpeg';
-import product4 from '../../../../images/temp/product4.jpeg';
-
-import color from '../../../GlobalStyles/color';
-
-const url = 'http://localhost:8080/api/images/product/';
 export default class TopProduct extends React.Component {
   gotoProductDetails(product) {
     const { navigator } = this.props;
