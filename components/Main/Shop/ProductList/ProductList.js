@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, FlatList } from 'react-native';
-import Drawer from 'react-native-drawer';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 
 import backList from '../../../../images/appIcon/backList.png';
-import product1 from '../../../../images/temp/product1.jpeg';
 
 import productList from '../../../../api/productList';
 
@@ -12,6 +18,8 @@ export default class ProductList extends Component {
     super(props);
     this.state = {
       productList: [],
+      refreshing: false,
+      page: 1,
     };
   }
 
@@ -30,6 +38,16 @@ export default class ProductList extends Component {
       this.setState({productList: resJSON});
     });
   }
+  _onRefresh = () => {
+    const page = this.state.page + 1;
+    const id = this.props.category.id;
+
+    this.setState({refreshing: true});
+    productList(id, page).then(resJSON => {
+      this.setState({refreshing: false, productList: resJSON});
+    });
+  };
+
   render() {
     const {
       container,
@@ -41,7 +59,10 @@ export default class ProductList extends Component {
       productImage,
       productInfor,
       detailsRow,
-      txtName, txtPrice, txtMaterial, txtColor,
+      txtName,
+      txtPrice,
+      txtMaterial, 
+      txtColor,
     } = styles;
     const { category } = this.props;
     return (
@@ -74,6 +95,12 @@ export default class ProductList extends Component {
                 </View>
               </TouchableOpacity>
             )}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
           />
         </View>
       </View>
