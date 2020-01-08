@@ -34,18 +34,14 @@ export default class ProductList extends Component {
   componentDidMount() {
     const {category} = this.props;
     productList(category.id, 1).then(resJSON => {
-      console.log(resJSON);
       this.setState({productList: resJSON});
     });
   }
   _onRefresh = () => {
-    const page = this.state.page + 1;
     const id = this.props.category.id;
+    const newpage= this.state.page + 1;
+    productList(id, newpage).then(res => this.setState({productList: res.concat(this.state.productList)}))
 
-    this.setState({refreshing: true});
-    productList(id, page).then(resJSON => {
-      this.setState({refreshing: false, productList: resJSON});
-    });
   };
 
   render() {
