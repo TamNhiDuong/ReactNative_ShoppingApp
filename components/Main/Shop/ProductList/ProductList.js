@@ -21,15 +21,15 @@ export default class ProductList extends Component {
       refreshing: false,
       page: 1,
     };
-  }
+  } 
 
   goBack() {
     const { navigator } = this.props;
     navigator.pop();
   }
-  gotoProductDetails() {
+  gotoProductDetails(product) {
     const { navigator } = this.props;
-    navigator.push({ name: 'PRODUCTDETAILS' });
+    navigator.push({ name: 'PRODUCTDETAILS', product });
   }
   componentDidMount() {
     const {category} = this.props;
@@ -85,10 +85,10 @@ export default class ProductList extends Component {
                     <Text style={txtMaterial}>{item.material}</Text>
                     <View style={detailsRow}>
                       <Text style={txtColor}>{item.color}</Text>
-                      <View style={{ backgroundColor: 'blue', width: 10, height: 10, borderRadius: 5 }} />
+                      <View style={{ backgroundColor: item.color.toLowerCase(), width: 10, height: 10, borderRadius: 5 }} />
                     </View>
                   </View>
-                </View>
+                </View> 
               </TouchableOpacity>
             )}
             refreshControl={

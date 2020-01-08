@@ -19,11 +19,23 @@ export default class ProductDetails extends Component {
   }
   render() {
     const {
-      wrapper, cardStyle, header,
-      footer, backStyle,
-      imageContainer, cartStyle, textBlack,
-      textSmoke, textHighlight, textMain, titleContainer,
-      descContainer, productImageStyle, descStyle, txtMaterial, txtColor
+      wrapper,
+      cardStyle,
+      header,
+      footer,
+      backStyle,
+      imageContainer,
+      cartStyle,
+      textBlack,
+      textSmoke,
+      textHighlight,
+      textMain,
+      titleContainer,
+      descContainer,
+      productImageStyle,
+      descStyle,
+      txtMaterial,
+      txtColor,
     } = styles;
     const {name, id, price, color, material, description, images} = this.props.product;
     return (
