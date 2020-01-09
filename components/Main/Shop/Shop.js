@@ -1,6 +1,6 @@
 //React-native
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Alert } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 //Components
 import Home from './Home/Home';
@@ -52,11 +52,26 @@ export default class Shop extends React.Component {
     .then(cartArray => this.setState({cartArray}));
   }
 
-  addProductToCart(product) {
-    this.setState(
-      {cartArray: this.state.cartArray.concat({product: product, quantity: 1})},
-      () => saveCart(this.state.cartArray),
+
+  alertDuplicated(id) {
+    Alert.alert(
+      'NOTICE',
+      'This product is already exist in cart. Do you want to add more?',
+      [{text: 'OK', onPress: this.incrQuantity(id)}],
+      {cancelable: false},
     );
+  }
+
+  addProductToCart(product) {
+    const isExist = this.state.cartArray.some(e => e.product.id === product.id);
+    if (isExist === true) {
+      this.alertDuplicated(product.id);
+    } else {
+      this.setState(
+        {cartArray: this.state.cartArray.concat({product: product, quantity: 1})},
+        () => saveCart(this.state.cartArray),
+      );
+    }
   }
 
   incrQuantity(productId) {
@@ -138,7 +153,7 @@ export default class Shop extends React.Component {
     );
   }
 }
-const styles = ({
+const styles = StyleSheet.create({
   icons: {height: 25, width: 25, padding: 15},
   title: {color:'#437777'},
 });
