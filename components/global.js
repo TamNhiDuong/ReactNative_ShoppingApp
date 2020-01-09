@@ -4,4 +4,6 @@ module.exports = {
     decrQuantity: null,
     removeItem:  null,
     changeMenu: null,
+    goToSearch: null,
+    search: null,
 }

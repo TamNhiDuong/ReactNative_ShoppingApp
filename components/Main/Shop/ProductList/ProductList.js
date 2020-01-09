@@ -39,9 +39,13 @@ export default class ProductList extends Component {
   }
   _onRefresh = () => {
     const id = this.props.category.id;
-    const newpage= this.state.page + 1;
-    productList(id, newpage).then(res => this.setState({productList: res.concat(this.state.productList)}))
-
+    const newpage = this.state.page + 1;
+    productList(id, newpage).then(res => 
+      this.setState({
+        productList: res.concat(this.state.productList),
+        refreshing: true,
+      }),
+    );
   };
 
   render() {
@@ -74,7 +78,7 @@ export default class ProductList extends Component {
           <FlatList
             data={this.state.productList}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => this.gotoProductDetails(item)}>
+              <TouchableOpacity onPress={() => this.gotoProductDetails(item)} key={item.id}>
                 <View style={productContainer}>
                   <Image 
                     style={productImage} 

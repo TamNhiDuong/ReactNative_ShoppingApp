@@ -37,6 +37,10 @@ export default class Shop extends React.Component {
     global.incrQuantity = this.incrQuantity.bind(this);
     global.decrQuantity = this.decrQuantity.bind(this);
     global.removeItem = this.removeItem.bind(this);
+    global.goToSearch = this.goToSearch.bind(this);
+  }
+  goToSearch() {
+    this.setState({selectedTab: 'search'});
   }
 
   componentDidMount() {

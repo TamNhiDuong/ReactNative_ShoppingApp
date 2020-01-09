@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image, Dimensions, FlatList } from 'react-native';
 
-import sp1 from '../../../../images/temp/product3.jpeg';
-import sp4 from '../../../../images/temp/product4.jpeg';
+import global from '../../../global'
 
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
 class SearchView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResult: [],
+    };
+    global.search = this.onSearch.bind(this);
+  }
+  onSearch(apiRes) {
+    this.setState({ searchResult: apiRes });
+    console.log("state: " + apiRes);
+  }
   gotoDetail() {
     const { navigator } = this.props;
     navigator.push({ name: 'PRODUCTDETAILS' });
@@ -17,63 +27,47 @@ class SearchView extends Component {
     const {
       product, mainRight, txtMaterial, txtColor,
       txtName, txtPrice, productImage,
-      txtShowDetail, showDetailContainer, wrapper
+      txtShowDetail, showDetailContainer, wrapper, emptyView
     } = styles;
     return (
-      <ScrollView style={wrapper}>
-        <View style={product}>
-          <Image source={sp1} style={productImage} />
-          <View style={mainRight}>
-            <Text style={txtName}>{toTitleCase('black dress')}</Text>
-            <Text style={txtPrice}>100$</Text>
-            <Text style={txtMaterial}>Material Fur</Text>
-            <View style={{ flexDirection: 'row' }} >
-              <Text style={txtColor}>Color white</Text>
-              <View
-                style={{
-                  height: 15,
-                  width: 15,
-                  backgroundColor: 'white',
-                  borderRadius: 15,
-                  marginLeft: 10
-                }}
+      <View style={wrapper}>
+        <FlatList
+          data={this.state.searchResult}
+          renderItem={({ item }) => (
+            <View style={product}>
+              <Image
+                source={{ url: 'http://localhost:8080/api/images/product/' + item.images[0] }}
+                style={productImage}
               />
-            </View>
-            <TouchableOpacity style={showDetailContainer}>
-              <Text style={txtShowDetail}>SHOW DETAILS</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={product}>
-          <Image source={sp4} style={productImage} />
-          <View style={mainRight}>
-            <Text style={txtName}>{toTitleCase('black dress')}</Text>
-            <Text style={txtPrice}>100$</Text>
-            <Text style={txtMaterial}>Material Fur</Text>
-            <View style={{ flexDirection: 'row' }} >
-              <Text style={txtColor}>Color white</Text>
-              <View style={{ flexDirection: 'row' }} >
-                <Text style={txtColor}>Color white</Text>
-                <View
-                  style={{
-                    height: 15,
-                    width: 15,
-                    backgroundColor: 'white',
-                    borderRadius: 15,
-                    marginLeft: 10
-                  }}
-                />
+              <View style={mainRight}>
+                <Text style={txtName}>{toTitleCase(item.name)}</Text>
+                <Text style={txtPrice}>{item.price}€</Text>
+                <Text style={txtMaterial}>{item.material}</Text>
+                <View style={{ flexDirection: 'row' }} >
+                  <Text style={txtColor}>{item.color}</Text>
+                  <View
+                    style={{
+                      height: 15,
+                      width: 15,
+                      backgroundColor: item.color.toLowerCase(),
+                      borderRadius: 15,
+                      marginLeft: 10
+                    }}
+                  />
+                </View>
+                <TouchableOpacity style={showDetailContainer}>
+                  <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                </TouchableOpacity>
               </View>
             </View>
-            <TouchableOpacity style={showDetailContainer}>
-              <Text style={txtShowDetail}>SHOW DETAILS</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
+          )}
+        />
+      </View>
     );
   }
 }
+/*
+*/
 
 const { width } = Dimensions.get('window');
 const imageWidth = width / 4;
@@ -152,7 +146,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'flex-end',
     marginTop: 100
-  }
+  },
+  emptyView: {
+    height: 15,
+    width: 15,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    marginLeft: 10,
+  },
 });
 
 export default SearchView;

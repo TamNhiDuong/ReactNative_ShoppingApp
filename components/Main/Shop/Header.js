@@ -3,9 +3,11 @@ import {View, Text, TouchableOpacity, Dimensions, Image, TextInput, StyleSheet}
 from 'react-native';
 
 import icMenu from '../../../images/appIcon/ic_menu.png';
-import icLogo from '../../../images/appIcon/ic_logo.png';
-import dress from '../../../images/appIcon/dress.png';
 import dress1 from '../../../images/appIcon/dress1.png';
+
+import global from '../../global';
+
+import searchAPI from '../../../api/searchAPI';
 
 //onPress={this.props.onOpen}
 //onPress={this.toggleDrawer.bind(this)}
@@ -13,6 +15,16 @@ const {height} = Dimensions.get('window');
 
 
 export default class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {txtInput: ''};
+  }
+  onSearch() {
+    const {txtInput} = this.state;
+    searchAPI(txtInput)
+      .then(res => global.search(res))
+      .catch(err => console.log(err));
+  }
   render() {
     const {wrapper, row1, input, icons, title, logo} = styles;
     return (
@@ -24,8 +36,15 @@ export default class Header extends Component {
           <Text style={title}>Uniquely You</Text>
           <Image source={dress1} style={logo} />
         </View>
-        <TextInput style={input} placeholder="What do you want to buy?"/>
-      </View>
+        <TextInput 
+          style={input} 
+          placeholder="What do you want to buy?"
+          onFocus={() => global.goToSearch()}
+          value={this.state.txtInput}
+          onChangeText={text => this.setState({txtInput: text})} 
+          onSubmitEditing={this.onSearch.bind(this)}
+        />
+      </View>  
     );
   }
 }

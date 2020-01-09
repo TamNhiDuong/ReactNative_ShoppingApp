@@ -11,7 +11,7 @@ export default class Search extends React.Component {
       <CustomComponents.Navigator
         initialRoute={{name: 'SEARCHVIEW'}}
         renderScene={(route, navigator) => {
-        switch(route.name) {
+          switch (route.name) {
             case 'SEARCHVIEW':
               return <SearchView navigator={navigator} />;
             default:
@@ -20,5 +20,6 @@ export default class Search extends React.Component {
       }}
       />
     );
-  }
+  }  
 }
+ 
