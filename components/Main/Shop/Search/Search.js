@@ -15,7 +15,7 @@ export default class Search extends React.Component {
             case 'SEARCHVIEW':
               return <SearchView navigator={navigator} />;
             default:
-              return <ProductDetails navigator={navigator} />;
+              return <ProductDetails navigator={navigator} product={route.product} />;
         }
       }}
       />

@@ -19,9 +19,9 @@ class SearchView extends Component {
     this.setState({ searchResult: apiRes });
     console.log("state: " + apiRes);
   }
-  gotoDetail() {
+  gotoDetail(product) {
     const { navigator } = this.props;
-    navigator.push({ name: 'PRODUCTDETAILS' });
+    navigator.push({ name: 'PRODUCTDETAILS', product });
   }
   render() {
     const {
@@ -34,32 +34,31 @@ class SearchView extends Component {
         <FlatList
           data={this.state.searchResult}
           renderItem={({ item }) => (
-            <View style={product}>
-              <Image
-                source={{ url: 'http://localhost:8080/api/images/product/' + item.images[0] }}
-                style={productImage}
-              />
-              <View style={mainRight}>
-                <Text style={txtName}>{toTitleCase(item.name)}</Text>
-                <Text style={txtPrice}>{item.price}€</Text>
-                <Text style={txtMaterial}>{item.material}</Text>
-                <View style={{ flexDirection: 'row' }} >
-                  <Text style={txtColor}>{item.color}</Text>
-                  <View
-                    style={{
-                      height: 15,
-                      width: 15,
-                      backgroundColor: item.color.toLowerCase(),
-                      borderRadius: 15,
-                      marginLeft: 10
-                    }}
-                  />
+            <TouchableOpacity onPress={() => this.gotoDetail(item)}>
+              <View style={product}>
+                <Image
+                  source={{ url: 'http://localhost:8080/api/images/product/' + item.images[0] }}
+                  style={productImage}
+                />
+                <View style={mainRight}>
+                  <Text style={txtName}>{toTitleCase(item.name)}</Text>
+                  <Text style={txtPrice}>{item.price}€</Text>
+                  <Text style={txtMaterial}>{item.material}</Text>
+                  <View style={{ flexDirection: 'row' }} >
+                    <Text style={txtColor}>{item.color}</Text>
+                    <View
+                      style={{
+                        height: 15,
+                        width: 15,
+                        backgroundColor: item.color.toLowerCase(),
+                        borderRadius: 15,
+                        marginLeft: 10
+                      }}
+                    />
+                  </View>
                 </View>
-                <TouchableOpacity style={showDetailContainer}>
-                  <Text style={txtShowDetail}>SHOW DETAILS</Text>
-                </TouchableOpacity>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>
