@@ -24,6 +24,7 @@ export default class Header extends Component {
     searchAPI(txtInput)
       .then(res => global.search(res))
       .catch(err => console.log(err));
+    this.setState({txtInput: ''})
   }
   render() {
     const {wrapper, row1, input, icons, title, logo} = styles;
