@@ -1,23 +1,29 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet, Dimensions} from 'react-native';
+import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
-import banner from '../../../../images/temp/banner.jpg'; 
+import banner from '../../../../images/temp/banner.jpg';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default class Category extends React.Component {
+  gotoListProduct(category) {
+    const { navigator } = this.props;
+    navigator.push({ name: 'PRODUCTLIST', category: {name: 'Spring Collection', id: 'COLLECTION'}});
+  }
   render() {
-    const {wrapper, image, text} = styles;
+    const { wrapper, image, text } = styles;
     return (
-      <View style={wrapper}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={text}>SPRING COLLECTION</Text>
+      <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
+        <View style={wrapper}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Text style={text}>SPRING COLLECTION</Text>
+          </View>
+          <View style={{ flex: 4 }}>
+            <Image source={banner} style={image} />
+          </View>
         </View>
-        <View style={{flex: 4}}>
-          <Image source={banner} style={image} />
-        </View>
-      </View>
-    ); 
+      </TouchableOpacity>
+    );
   }
 }
 const imageWidth = width - 40;
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     margin: 10,
     shadowColor: '#2E272B',
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     padding: 10
   },

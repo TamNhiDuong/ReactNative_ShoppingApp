@@ -48,7 +48,7 @@ export default class ProductList extends Component {
     );
   };
 
-  render() {
+  render() { 
     const {
       container,
       wrapper,

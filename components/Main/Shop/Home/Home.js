@@ -23,7 +23,7 @@ export default class Home extends React.Component {
                 />
               );
             case 'PRODUCTLIST':
-              return <ProductList navigator={navigator} category={route.category} />;
+              return <ProductList navigator={navigator} category={route.category} collection={route.collection} />;
             default:
               return <ProductDetails navigator={navigator} product={route.product}/>;
         }
@@ -32,3 +32,4 @@ export default class Home extends React.Component {
     );
   }
 }
+  
