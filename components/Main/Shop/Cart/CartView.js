@@ -6,10 +6,12 @@ import {
 
 import global from '../../../global';
 
+import submitOrder from '../../../../api/submitOrder';
+import getToken from '../../../../api/getToken';
+
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
-
 class CartView extends Component {
   incrQuantity(id) {
     global.incrQuantity(id);
@@ -20,9 +22,26 @@ class CartView extends Component {
   removeItem(id) {
     global.removeItem(id);
   }
-  gotoDetail() {
+  gotoDetail(product) {
     const { navigator } = this.props;
-    navigator.push({ name: 'PRODUCTDETAILS' });
+    navigator.push({ name: 'PRODUCTDETAILS'});
+  }
+  async submitOrder() {
+    try {
+      const token = await getToken();
+      const arrayDetail = this.props.cartArray.map(e => ({
+        "id" : e.product.id,
+        "quantity": e.quantity
+      }));
+      const response = await submitOrder(token, arrayDetail);
+      if (response === "THEM_THANH_CONG") {
+        console.log('THEM_THANH_CONG');
+      } else {
+        console.log('NO');
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
   render() {
     const { cartArray } = this.props;
@@ -65,12 +84,12 @@ class CartView extends Component {
                     <Text style={txtShowDetail}>SHOW DETAILS</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </View> 
             </View>
           )}
         />
 
-        <TouchableOpacity style={checkoutButton}>
+        <TouchableOpacity style={checkoutButton} onPress={this.submitOrder.bind(this)}>
           <Text style={checkoutTitle}>TOTAL {totalPrice}€ CHECKOUT NOW</Text>
         </TouchableOpacity>
       </View>

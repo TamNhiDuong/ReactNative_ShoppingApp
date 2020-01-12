@@ -72,7 +72,7 @@ export default class Shop extends React.Component {
         () => saveCart(this.state.cartArray),
       );
     }
-  }
+  } 
 
   incrQuantity(productId) {
     const newCart = this.state.cartArray.map(e => {
