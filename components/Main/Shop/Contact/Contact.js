@@ -7,18 +7,31 @@ import mailIcon from '../../../../images/appIcon/mail.png';
 import messageIcon from '../../../../images/appIcon/message.png';
 import locationIcon from '../../../../images/appIcon/location.png';
 
+import MapView from 'react-native-maps';
 class Contact extends Component {
   render() {
     const {
       mapContainer, wrapper, infoContainer,
-      rowInfoContainer, imageStyle, infoText
+      rowInfoContainer, imageStyle, infoText, mapStyle
     } = styles;
     return (
       <View style={wrapper}>
         <View style={mapContainer}>
-          <Image
-            style={{ flex: 1, alignSelf: 'stretch', width: undefined }} source={map}
-          />
+          <MapView
+            style={mapStyle}
+            initialRegion={{
+              latitude: 60.220800,
+              longitude: 24.777650,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          >
+            <MapView.Marker 
+            coordinate={{latitude: 60.220800, longitude: 24.777650}}
+            title="Uniquely You Shop"
+            description= "Come and visit"
+            />
+          </MapView>
         </View>
         <View style={infoContainer}>
           <View style={rowInfoContainer}>
@@ -43,7 +56,7 @@ class Contact extends Component {
   }
 }
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   wrapper: { flex: 1, backgroundColor: '#F6F6F6' },
   mapStyle: {
@@ -91,6 +104,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir',
     color: '#AE005E',
     fontWeight: '500'
+  },
+  mapStyle: {
+    height: 300,
+    width: width - 20,
   }
 });
 
