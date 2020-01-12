@@ -24,7 +24,7 @@ class CartView extends Component {
   }
   gotoDetail(product) {
     const { navigator } = this.props;
-    navigator.push({ name: 'PRODUCTDETAILS'});
+    navigator.push({name: 'PRODUCTDETAILS', product});
   }
   async submitOrder() {
     try {
@@ -80,7 +80,7 @@ class CartView extends Component {
                       <Text>-</Text>
                     </TouchableOpacity>
                   </View>
-                  <TouchableOpacity style={showDetailContainer}>
+                  <TouchableOpacity style={showDetailContainer} onPress={() => this.gotoDetail(item.product)}>
                     <Text style={txtShowDetail}>SHOW DETAILS</Text>
                   </TouchableOpacity>
                 </View>

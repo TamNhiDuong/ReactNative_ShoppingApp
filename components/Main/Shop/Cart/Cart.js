@@ -16,7 +16,7 @@ export default class Cart extends React.Component {
             case 'CARTVIEW':
               return <CartView navigator={navigator} cartArray={cartArray}/>;
             default:
-              return <ProductDetails navigator={navigator} />;
+              return <ProductDetails navigator={navigator} product={route.product}/>;
         }
       }}
       />
