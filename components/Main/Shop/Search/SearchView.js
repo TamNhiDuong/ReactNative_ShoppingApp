@@ -37,7 +37,7 @@ class SearchView extends Component {
             <TouchableOpacity onPress={() => this.gotoDetail(item)}>
               <View style={product}>
                 <Image
-                  source={{ url: 'http://localhost:8080/api/images/product/' + item.images[0] }}
+                  source={{ url: 'http://localhost/api/images/product/' + item.images[0] }}
                   style={productImage}
                 />
                 <View style={mainRight}>

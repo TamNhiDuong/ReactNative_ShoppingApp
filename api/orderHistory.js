@@ -1,5 +1,5 @@
 const orderHistory = (token) => (
-    fetch('http://localhost:8080/api/order_history.php', {
+    fetch('http://localhost/app-server/order_history.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

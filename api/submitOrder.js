@@ -1,5 +1,5 @@
 const submitOrder = (token, arrayDetail) => (
-  fetch('http://localhost:8080/api/cart.php', {
+  fetch('http://localhost/app-server/cart.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -47,10 +47,17 @@ export default class Shop extends React.Component {
     initData().then(resJSON => {
       const {type, product} = resJSON; 
       this.setState({types: type, topProducts: product});
+      console.log(resJSON)
     });
     getCart()
     .then(cartArray => this.setState({cartArray}));
   }
+
+  /*componentDidMount() {
+    fetch('http://localhost/api/')
+    .then(res => res.json())
+    .then(resJSON => console.log(resJSON));
+  }*/
 
 
   alertDuplicated(id) {

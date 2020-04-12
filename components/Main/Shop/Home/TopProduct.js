@@ -33,7 +33,7 @@ export default class TopProduct extends React.Component {
               style={productContainer}
               onPress={() => this.gotoProductDetails(item)}>
               <Image
-                source={{ url: 'http://localhost:8080/api/images/product/' + item.images[0] }}
+                source={{ uri: 'http://localhost/app-server/images/product/' + item.images[0] }}
                 style={product}
               />
               <Text style={productName}>{item.name.toUpperCase()}</Text>

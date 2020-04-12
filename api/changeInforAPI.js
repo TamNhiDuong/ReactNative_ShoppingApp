@@ -1,5 +1,5 @@
 const changeInforAPI = (token, name, address, phone) => (
-  fetch('http://localhost:8080/api/change_info.php', {
+  fetch('http://localhost/app-server/change_info.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

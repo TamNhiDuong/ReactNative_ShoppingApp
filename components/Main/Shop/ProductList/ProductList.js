@@ -82,7 +82,7 @@ export default class ProductList extends Component {
                 <View style={productContainer}>
                   <Image 
                     style={productImage} 
-                    source={{url: 'http://localhost:8080/api/images/product/'+ item.images[0]}}/>
+                    source={{url: 'http://localhost/app-server/images/product/'+ item.images[0]}}/>
                   <View style={productInfor}>
                     <Text style={txtName}>{item.name}</Text>
                     <Text style={txtPrice}>{item.price}€</Text>

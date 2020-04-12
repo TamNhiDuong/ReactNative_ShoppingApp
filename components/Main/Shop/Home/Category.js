@@ -3,7 +3,7 @@ import {Text, View, ImageBackground, StyleSheet, Dimensions, TouchableOpacity} f
 import Swiper from 'react-native-swiper'
 
 const {height, width} = Dimensions.get('window');
-const url = 'http://localhost:8080/api/images/type/';
+const url = 'http://localhost/app-server/images/type/';
 
 export default class Collection extends React.Component {
   gotoListProduct(category) {
@@ -26,7 +26,7 @@ export default class Collection extends React.Component {
                 key={e.id}>
                 <ImageBackground
                   style={image}
-                  source={{url: 'http://localhost:8080/api/images/type/'+ e.image}}>
+                  source={{url: 'http://localhost/app-server/images/type/'+ e.image}}>
                   <View style={cateWrap}>
                     <Text style={cateTitle}>{e.name}</Text>
                   </View>

@@ -59,7 +59,7 @@ class CartView extends Component {
           data={cartArray}
           renderItem={({ item }) => (
             <View style={product}>
-              <Image source={{ url: 'http://localhost:8080/api/images/product/' + item.product.images[0]}} style={productImage} />
+              <Image source={{ url: 'http://localhost/api/images/product/' + item.product.images[0]}} style={productImage} />
               <View style={[mainRight]}>
                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                   <Text style={txtName}>{toTitleCase(item.product.name)}</Text>

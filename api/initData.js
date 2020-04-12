@@ -1,5 +1,5 @@
 const initData = () => (
-    fetch('http://localhost:8080/api/')
+    fetch('http://localhost/app-server/')
         .then(res => res.json())
 );
 export default initData;
