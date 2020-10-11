@@ -1,5 +1,5 @@
 const submitOrder = (token, arrayDetail) => (
-  fetch('http://localhost/app-server/cart.php', {
+  fetch('https://php-server-shopping-app.herokuapp.com/cart.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

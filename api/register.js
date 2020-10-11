@@ -1,5 +1,5 @@
 const register = (email, name, password) => (
-  fetch('http://localhost/app-server/register.php',
+  fetch('https://php-server-shopping-app.herokuapp.com/register.php',
 {
     method: 'POST',
     headers: {

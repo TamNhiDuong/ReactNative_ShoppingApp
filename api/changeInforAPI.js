@@ -1,5 +1,5 @@
 const changeInforAPI = (token, name, address, phone) => (
-  fetch('http://localhost/app-server/change_info.php', {
+  fetch('https://php-server-shopping-app.herokuapp.com/change_info.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 const initData = () => (
-    fetch('http://localhost/app-server/')
+    fetch('https://php-server-shopping-app.herokuapp.com/')
         .then(res => res.json())
 );
 export default initData;

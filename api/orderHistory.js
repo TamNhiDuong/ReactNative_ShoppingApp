@@ -1,5 +1,5 @@
 const orderHistory = (token) => (
-    fetch('http://localhost/app-server/order_history.php', {
+    fetch('https://php-server-shopping-app.herokuapp.com/order_history.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

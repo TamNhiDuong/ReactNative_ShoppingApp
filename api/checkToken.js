@@ -1,5 +1,5 @@
 const checkToken = (token) => (
-  fetch('http://localhost/app-server/check_login.php', {
+  fetch('https://php-server-shopping-app.herokuapp.com/check_login.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
